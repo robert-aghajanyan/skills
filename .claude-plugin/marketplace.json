@@ -1,0 +1,44 @@
+{
+  "name": "robert-aghajanyan-agent-skills",
+  "owner": {
+    "name": "Robert Aghajanyan",
+    "url": "https://github.com/robert-aghajanyan"
+  },
+  "metadata": {
+    "description": "Agent skills for Claude Code — code quality, research, review, and skill creation",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "code-quality-skills",
+      "description": "Collection of code quality and review skills: module decomposition, prompt caching optimization, and multi-agent PR review.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/decompose",
+        "./skills/optimize-prompt-caching",
+        "./skills/team-review"
+      ]
+    },
+    {
+      "name": "team-skills",
+      "description": "Multi-agent team skills: adversarial research swarms and thorough PR review with specialized agent teams.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/team-research",
+        "./skills/team-review"
+      ]
+    },
+    {
+      "name": "meta-skills",
+      "description": "Skills for building and optimizing skills and LLM workflows.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/skill-builder",
+        "./skills/optimize-prompt-caching"
+      ]
+    }
+  ]
+}
