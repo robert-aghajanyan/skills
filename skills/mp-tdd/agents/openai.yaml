@@ -1,4 +1,0 @@
-interface:
-  display_name: "MP TDD"
-  short_description: "Guide test-first feature work"
-  default_prompt: "Use $mp-tdd to build this change with red-green-refactor TDD."

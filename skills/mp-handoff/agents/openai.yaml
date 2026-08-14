@@ -1,4 +1,0 @@
-interface:
-  display_name: "MP Handoff"
-  short_description: "Write handoff docs for future sessions"
-  default_prompt: "Use $mp-handoff to write a concise handoff document for the next session."

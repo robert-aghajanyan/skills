@@ -81,3 +81,10 @@ Or "None - can start immediately" if no blockers.
 </issue-template>
 
 Do NOT close or modify any parent issue.
+
+## Gotchas
+
+- **`/setup-matt-pocock-skills` is not part of this repo.** If the issue tracker or triage label vocabulary hasn't been configured some other way, ask the user directly for the tracker (GitHub, Linear, Jira, etc.) and the label to apply, rather than invoking a skill that doesn't exist here.
+- **Tracer bullets, not layers** — an issue that says "add the DB migration" or "build the API endpoint" is a horizontal slice in disguise. Every issue should be independently demoable end-to-end, even if narrow.
+- **Publish blockers first** — if a later issue's "Blocked by" field needs to reference an earlier one by ID, that earlier issue must already be published, or the reference will be a dangling placeholder.
+- **Don't paste file paths or code into the issue body** — they go stale as the codebase moves; the one exception is a prototype snippet that encodes a decision (schema, reducer, state machine) more precisely than prose could.

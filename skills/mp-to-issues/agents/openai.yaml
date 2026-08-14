@@ -1,4 +1,0 @@
-interface:
-  display_name: "MP To Issues"
-  short_description: "Break plans into vertical issues"
-  default_prompt: "Use $mp-to-issues to break this plan into vertical implementation issues."

@@ -86,3 +86,11 @@ Only offer to create an ADR when all three are true:
 If any of the three is missing, skip the ADR. Use the format in [ADR-FORMAT.md](./ADR-FORMAT.md).
 
 </supporting-info>
+
+## Gotchas
+
+- **Don't batch questions** — ask one at a time and wait for the answer. Firing a list of questions defeats the point of a relentless, dependency-ordered interview.
+- **`CONTEXT.md` is a glossary, not a scratch pad** — resist the pull to log implementation notes, TODOs, or open questions there. If it's not a resolved term or relationship, it doesn't belong.
+- **Create `CONTEXT.md`/`docs/adr/` lazily** — don't scaffold empty structure up front. Create the file only when the first term or decision is actually ready to be written.
+- **Multi-context repos need `CONTEXT-MAP.md` checked first** — if one exists, resolve terms into the context-specific `CONTEXT.md` under `src/<context>/`, not the root one.
+- **Most trade-offs don't earn an ADR** — only write one when it's hard to reverse, surprising without context, AND the result of a genuine alternative. Default to skipping.

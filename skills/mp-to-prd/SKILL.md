@@ -74,3 +74,10 @@ A description of the things that are out of scope for this PRD.
 Any further notes about the feature.
 
 </prd-template>
+
+## Gotchas
+
+- **`/setup-matt-pocock-skills` is not part of this repo.** If the issue tracker or triage label vocabulary hasn't been configured some other way, ask the user directly rather than invoking a skill that doesn't exist here.
+- **Do NOT interview the user.** This skill's entire premise is synthesizing from context already gathered. If the conversation genuinely lacks enough detail to write a real PRD, say so instead of silently switching into an interview — that's a different skill's job.
+- **User stories should be extensive, not padded** — err toward more coverage of real scenarios, not restating the same story with trivial rewording to hit a length target.
+- **No file paths or code snippets in Implementation Decisions** — the one exception is a prototype snippet that encodes a decision (schema, state machine, reducer) more precisely than prose can.

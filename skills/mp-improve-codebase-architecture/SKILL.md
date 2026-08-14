@@ -69,3 +69,11 @@ Side effects happen inline as decisions crystallize:
 - **Sharpening a fuzzy term during the conversation?** Update `CONTEXT.md` right there.
 - **User rejects the candidate with a load-bearing reason?** Offer an ADR, framed as: _"Want me to record this as an ADR so future architecture reviews don't re-suggest it?"_ Only offer when the reason would actually be needed by a future explorer to avoid re-suggesting the same thing — skip ephemeral reasons ("not worth it right now") and self-evident ones. See [ADR-FORMAT.md](../mp-grill-with-docs/ADR-FORMAT.md).
 - **Want to explore alternative interfaces for the deepened module?** See [INTERFACE-DESIGN.md](INTERFACE-DESIGN.md).
+
+## Gotchas
+
+- **Depth is not "small module."** A module can be tiny and shallow (interface as complex as its guts) or large and deep (huge implementation, trivial interface). Judge by the deletion test, not line count.
+- **One adapter isn't a real seam yet** — don't propose extracting an interface just because a module could theoretically have alternatives. Wait for a second real adapter, or a concrete near-term need for one, before calling it a seam.
+- **Extracting pure functions doesn't create locality** — if the bugs actually live in how those functions get called and composed, pulling them out for "testability" just spreads the same complexity across more files.
+- **Don't relitigate ADRs on weak grounds** — a candidate that contradicts a recorded decision needs friction real enough to justify reopening it, not just theoretical tidiness.
+- **Stay in the glossary** — drifting into "component," "service," "boundary," or code-specific names (`FooBarHandler`) instead of `CONTEXT.md`/`LANGUAGE.md` vocabulary undermines the whole point of consistent language.

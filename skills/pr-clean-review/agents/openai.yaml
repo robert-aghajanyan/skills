@@ -1,4 +1,0 @@
-interface:
-  display_name: "PR Clean Review"
-  short_description: "Clean PRs with fast-strict review and fix gates"
-  default_prompt: "Review and fix PR NUMBER until it is code-clean and, if GitHub allows it, mergeable. Use fast-strict mode: one broad parallel xhigh discovery pass, batch blocker/high fixes, verify the evidence ledger, run a context-isolated final clean-room review, push only if asked, and do not merge."

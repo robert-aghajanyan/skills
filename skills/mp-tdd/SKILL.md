@@ -107,3 +107,10 @@ After all tests pass, look for [refactor candidates](refactoring.md):
 [ ] Code is minimal for this test
 [ ] No speculative features added
 ```
+
+## Gotchas
+
+- **Horizontal slicing is the default failure mode** — under time pressure it's tempting to write all the tests up front "to save time." Resist it; it produces tests that verify imagined shape, not observed behavior.
+- **A test that survives a rename but breaks on a real behavior change is doing its job** — the reverse (breaks on rename, survives a behavior change) means it's coupled to implementation and should be rewritten, not patched.
+- **Don't refactor while RED** — get to GREEN first, even if the implementation is ugly. Refactoring against a failing test conflates two different kinds of change and makes it unclear which one broke things.
+- **"Can't test everything" is a real constraint, not an excuse** — get explicit user agreement on which behaviors matter before skipping coverage, rather than silently deciding what's out of scope.
