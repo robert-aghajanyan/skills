@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "purpose": "Machine-readable trigger fixtures for the production-readiness-gate skill. These fixtures verify prompt-to-contract coverage in the installed skill bundle; they do not claim to test a live model response.",
+  "fixtures": [
+    {
+      "id": "explicit-empty-invocation",
+      "prompt": "$production-readiness-gate",
+      "should_run_gate": true,
+      "expected_behavior": "Ask for the exact target before judging readiness.",
+      "required_markers": [
+        "What exact target should I run the production-readiness gate against",
+        "If the target is not clear"
+      ]
+    },
+    {
+      "id": "default-intent-no-target",
+      "prompt": "$production-readiness-gate Run one more round of verification. I need production readiness, leadership-safe confidence scores, and clear residual risks.",
+      "should_run_gate": true,
+      "expected_behavior": "Apply the default conservative verification intent, then ask for a target when none is available.",
+      "required_markers": [
+        "Default intent when this skill is triggered",
+        "asks for the exact target unless recent context already identifies one"
+      ]
+    },
+    {
+      "id": "pr-confidence-scores",
+      "prompt": "Run the production-readiness gate for PR 123 and give me confidence scores.",
+      "should_run_gate": true,
+      "expected_behavior": "Verify live PR state, checks, comments, source/base/head, tests, and mergeability before scoring.",
+      "required_markers": [
+        "live PR mergeability, checks, review state, and comments",
+        "Code/PR/artifact readiness"
+      ]
+    },
+    {
+      "id": "robust-reusable-leadership-ready",
+      "prompt": "Let's do one more round of verification. I need this to be robust, reliable, reusable, and leadership-ready.",
+      "should_run_gate": true,
+      "expected_behavior": "Reconstruct the claim, map risk surfaces, prove reusability, and separate residual risks from optional improvements.",
+      "required_markers": [
+        "Reconstruct the claim",
+        "Build a risk-surface map",
+        "Separate residual risks from room-for-improvement ideas"
+      ]
+    },
+    {
+      "id": "local-skill-target",
+      "prompt": "Use production-readiness-gate to evaluate /path/to/a/local/skill",
+      "should_run_gate": true,
+      "expected_behavior": "Treat the local path as the target, verify file inventory and validation commands, record checksum/version caveats, and avoid claiming commit-level traceability unless it exists.",
+      "required_markers": [
+        "local skill directory",
+        "file inventory",
+        "content checksum"
+      ]
+    },
+    {
+      "id": "high-stakes-production-ready",
+      "prompt": "Is this production ready? I do not want to fail.",
+      "should_run_gate": true,
+      "expected_behavior": "Apply conservative verification and return Ready, Ready With Caveats, or Not Ready with confidence scores.",
+      "required_markers": [
+        "Treat high-stakes language",
+        "Ready With Caveats",
+        "Confidence"
+      ]
+    },
+    {
+      "id": "near-miss-brainstorm",
+      "prompt": "Brainstorm production-readiness ideas for a future proposal.",
+      "should_run_gate": false,
+      "expected_behavior": "Do not run the gate unless the user asks for a readiness verdict on a concrete target.",
+      "required_markers": [
+        "Near-miss:",
+        "does not run the gate unless the user asks"
+      ]
+    },
+    {
+      "id": "near-miss-checklist",
+      "prompt": "Help me draft a production-readiness checklist for a future project.",
+      "should_run_gate": false,
+      "expected_behavior": "Provide planning help without scoring readiness or using the gate output shape.",
+      "required_markers": [
+        "Near-miss:",
+        "provides planning help without scoring readiness"
+      ]
+    },
+    {
+      "id": "near-miss-concept",
+      "prompt": "What does production ready usually mean for services like this?",
+      "should_run_gate": false,
+      "expected_behavior": "Explain the concept without judging a concrete target.",
+      "required_markers": [
+        "Near-miss:",
+        "explains the concept without judging a concrete target"
+      ]
+    }
+  ]
+}

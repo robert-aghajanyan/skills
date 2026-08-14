@@ -1,0 +1,7 @@
+{
+  "max_rounds": 2,
+  "codex_model": "gpt-5.4",
+  "codex_reasoning_effort": "xhigh",
+  "codex_timeout": 180000,
+  "codex_sandbox": "read-only"
+}

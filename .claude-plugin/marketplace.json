@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Agent skills for Claude Code — code quality, research, review, and skill creation",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {
@@ -38,6 +38,67 @@
       "skills": [
         "./skills/skill-builder",
         "./skills/optimize-prompt-caching"
+      ]
+    },
+    {
+      "name": "codebase-review-skills",
+      "description": "Deep, dimension-specific repository review skills — security, performance, architecture, reliability, data correctness, dependencies, docs, frontend, LLM/agent safety, developer experience, API contracts, test quality, and cleanup — plus a suite orchestrator that runs them all and files a deduplicated issue backlog.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/codebase-review-suite",
+        "./skills/codebase-security-review",
+        "./skills/codebase-performance-review",
+        "./skills/codebase-architecture-review",
+        "./skills/codebase-reliability-review",
+        "./skills/codebase-data-correctness-review",
+        "./skills/codebase-dependency-supply-chain-review",
+        "./skills/codebase-documentation-review",
+        "./skills/codebase-frontend-quality-review",
+        "./skills/codebase-llm-agent-safety-review",
+        "./skills/codebase-developer-experience-review",
+        "./skills/codebase-api-contract-review",
+        "./skills/codebase-test-quality-review",
+        "./skills/codebase-cleanup",
+        "./skills/codebase-consolidation-cleanup",
+        "./skills/codebase-decomposition"
+      ]
+    },
+    {
+      "name": "pr-workflow-skills",
+      "description": "PR review and merge-readiness workflows: team review, evidence-calibrated enhanced review, fast-strict clean/fix loops, iterative review-and-fix, and a final production-readiness gate.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/team-review",
+        "./skills/team-review-plus",
+        "./skills/pr-clean-review",
+        "./skills/pr-review-fix",
+        "./skills/production-readiness-gate"
+      ]
+    },
+    {
+      "name": "planning-skills",
+      "description": "Plan-stress-testing and delivery-shaping skills: adversarial interviews against a plan, TDD red-green-refactor, architecture-deepening passes, and turning plans/context into PRDs or tracer-bullet issues.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/mp-grill-me",
+        "./skills/mp-grill-with-docs",
+        "./skills/mp-improve-codebase-architecture",
+        "./skills/mp-tdd",
+        "./skills/mp-to-prd",
+        "./skills/mp-to-issues",
+        "./skills/mp-handoff"
+      ]
+    },
+    {
+      "name": "collab-skills",
+      "description": "Cross-model collaboration: a parallel Claude + Codex critique loop that debates to convergence.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/codex-collab"
       ]
     }
   ]

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codebase Decomposition"
+  short_description: "Split large modules safely"
+  default_prompt: "Use $codebase-decomposition to plan a behavior-preserving split for this large module."

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "name": "production-readiness-gate",
+  "version": "1.1.1",
+  "generated_at": "2026-05-21T07:04:57Z",
+  "source": {
+    "type": "git-working-copy",
+    "installed_path": "/Users/rob/.claude/skills/production-readiness-gate",
+    "git_commit": "5391ede2cdefe919a5415df16770ed09928ff378",
+    "provenance_note": "Installed copy is validated by file checksums and stamped with source commit and tag provenance.",
+    "source_repo": "<local-source-checkout>/production-readiness-gate",
+    "source_tag": "production-readiness-gate-v1.1.1"
+  },
+  "content_sha256": "226012fe3ecc74e5c5db4d8b3c3035cef2bbaf32d51630b8f927c5e6ce1286a3",
+  "tracked_files": [
+    {
+      "path": ".gitignore",
+      "sha256": "60c9bdd905fcf45ac485c680d32e9773962cf061b6f041dcddd033911558a672"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "1253279a68109c2b2f6c7190b93072959ab4e25e4da2cafe2d09dc9069dd7887"
+    },
+    {
+      "path": "references/evidence-ledger-template.md",
+      "sha256": "67f03c643190b00285add9f7292961edad34037b6844198485050155078127b8"
+    },
+    {
+      "path": "references/golden-transcripts.md",
+      "sha256": "2315b16549e7dbe6a69079ef15c0fb6361db4e7bd5e668bf384549811d21207b"
+    },
+    {
+      "path": "references/readiness-rubric.md",
+      "sha256": "2399be39ad71576d1bb4afb42bbeec9ac117170c8f72d5f727532da56c3ce3c8"
+    },
+    {
+      "path": "references/release-notes.md",
+      "sha256": "1b1d43305c3a5e8d97cc37b71ed7a3a146a6dd3a77b1a7af0c3832e29de85787"
+    },
+    {
+      "path": "references/response-contract-fixtures.json",
+      "sha256": "fd07619d51c74add89d9c403ab0f49f9e75e7939c491c266d353935ccc44fbb2"
+    },
+    {
+      "path": "references/risk-surface-checklist.md",
+      "sha256": "813cc1e654b21d8b1885e21dbe51f37a1fbd4e39b4095840211d92d0201803e7"
+    },
+    {
+      "path": "references/trigger-fixtures.json",
+      "sha256": "4e4598e02c0a674297dd2b4bbdf4c8a9bcd37979c294bfcff33ee17c4e0a87d0"
+    },
+    {
+      "path": "scripts/smoke_production_readiness_gate.py",
+      "sha256": "d8a97252e371408e910204ccc5016810782981165627f98ac0b9019d9d727f01"
+    },
+    {
+      "path": "scripts/update_manifest.py",
+      "sha256": "49069973a0b1cc6c43d2aad06f96329e73a4f063e977541fff86740399544091"
+    }
+  ]
+}

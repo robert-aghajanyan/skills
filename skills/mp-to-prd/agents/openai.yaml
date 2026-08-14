@@ -1,0 +1,4 @@
+interface:
+  display_name: "MP To PRD"
+  short_description: "Create PRDs from current context"
+  default_prompt: "Use $mp-to-prd to turn the current context into a PRD."

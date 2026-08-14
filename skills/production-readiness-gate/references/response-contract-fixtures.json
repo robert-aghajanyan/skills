@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "purpose": "Transcript-style response contracts for deterministic skill tests. These fixtures define expected response modes and markers; the smoke test validates fixture schema plus matching golden transcript examples, but does not execute a live model.",
+  "fixtures": [
+    {
+      "id": "no-target-clarifying-question",
+      "prompt": "$production-readiness-gate",
+      "response_mode": "clarifying_question",
+      "golden_response_id": "no-target-clarifying-question",
+      "required_response_markers": [
+        "What exact target should I run the production-readiness gate against"
+      ],
+      "forbidden_response_markers": [
+        "**Verdict**",
+        "production-ready"
+      ]
+    },
+    {
+      "id": "local-skill-verdict",
+      "prompt": "Use production-readiness-gate to evaluate /path/to/a/local/skill",
+      "response_mode": "gate_verdict",
+      "golden_response_id": "local-skill-verdict",
+      "required_response_markers": [
+        "**Verdict**",
+        "**Confidence**",
+        "Code/PR/artifact readiness",
+        "content checksum",
+        "provenance"
+      ],
+      "forbidden_response_markers": [
+        "Git commit verified"
+      ]
+    },
+    {
+      "id": "pr-verdict",
+      "prompt": "Run the production-readiness gate for PR 123 and give me confidence scores.",
+      "response_mode": "gate_verdict",
+      "golden_response_id": "pr-verdict",
+      "required_response_markers": [
+        "**Verdict**",
+        "live PR",
+        "checks",
+        "mergeability",
+        "Residual Risks"
+      ],
+      "forbidden_response_markers": [
+        "deployed and smoke-tested"
+      ]
+    },
+    {
+      "id": "future-checklist-near-miss",
+      "prompt": "Help me draft a production-readiness checklist for a future project.",
+      "response_mode": "no_gate",
+      "golden_response_id": "future-checklist-near-miss",
+      "required_response_markers": [
+        "checklist"
+      ],
+      "forbidden_response_markers": [
+        "**Verdict**",
+        "Code/PR/artifact readiness"
+      ]
+    },
+    {
+      "id": "concept-near-miss",
+      "prompt": "What does production ready usually mean for services like this?",
+      "response_mode": "no_gate",
+      "golden_response_id": "concept-near-miss",
+      "required_response_markers": [
+        "production ready"
+      ],
+      "forbidden_response_markers": [
+        "**Verdict**",
+        "**Confidence**"
+      ]
+    }
+  ]
+}

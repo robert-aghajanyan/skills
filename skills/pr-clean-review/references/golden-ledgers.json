@@ -1,0 +1,124 @@
+{
+  "valid_high_risk_mergeable": {
+    "pr": 123,
+    "mode": "fast-strict",
+    "risk_level": "high",
+    "head_sha": "abc123",
+    "github": {
+      "headRefOid": "abc123",
+      "baseRefName": "main",
+      "headRefName": "feature/pr-branch",
+      "mergeable": "MERGEABLE",
+      "mergeStateStatus": "CLEAN"
+    },
+    "workspace": {
+      "strategy": "temp-clone",
+      "clean": true
+    },
+    "review_structure": {
+      "source_skill": "team-review-plus",
+      "source_skill_loaded": true,
+      "team_review_skill_loaded": true,
+      "parallel_agents_requested": true,
+      "reasoning_effort": "xhigh",
+      "reviewer_count": 4,
+      "lenses": ["security", "performance", "correctness", "guardrails"],
+      "initial_discovery_full": true,
+      "post_fix_verification": "ledger-focused",
+      "final_clean_room": true
+    },
+    "execution_policy": {
+      "push_requested": true,
+      "pushed": true,
+      "remote_head_verified": true,
+      "merged": false
+    },
+    "fix_scope": {
+      "allowed_severities": ["CRITICAL", "WARNING"],
+      "suggestions_blocking": false,
+      "fixed_low_severity": false,
+      "user_requested_low_severity_cleanup": false
+    },
+    "round_limits": {
+      "max_fix_rounds": 3,
+      "fix_rounds_used": 1,
+      "stopped_for_repeat_blocker": false
+    },
+    "rounds": [
+      {
+        "round": 1,
+        "head_sha": "abc123",
+        "review_mode": "parallel-team-review",
+        "critical": 1,
+        "warning": 1,
+        "suggestion": 0,
+        "summary": "Initial discovery"
+      }
+    ],
+    "findings": [
+      {
+        "id": "F1",
+        "finding": "Unsafe variant accepted",
+        "severity": "WARNING",
+        "status": "closed",
+        "file": "src/example.py",
+        "proof": "pytest tests/test_example.py -q",
+        "fixed_by": "abc123",
+        "verified_by": "final calibration"
+      }
+    ],
+    "risk_surfaces": [
+      {
+        "surface": "URL allowlist",
+        "status": "closed",
+        "entrypoints": ["CLI"],
+        "negative_tests": ["userinfo host rejected"],
+        "observed_behavior": "Unsafe variants fail closed"
+      }
+    ],
+    "final_calibration": {
+      "head_sha": "abc123",
+      "review_mode": "clean-room-team-review-plus",
+      "fresh": true,
+      "independent": true,
+      "context_isolated": true,
+      "critical": 0,
+      "warning": 0,
+      "commands": ["pytest tests/test_example.py -q"]
+    },
+    "clean_passes": [
+      {
+        "name": "post-fix full review",
+        "head_sha": "abc123",
+        "review_mode": "ledger-focused-verification",
+        "fresh": true,
+        "independent": true,
+        "critical": 0,
+        "warning": 0
+      },
+      {
+        "name": "final clean-room calibration",
+        "head_sha": "abc123",
+        "review_mode": "clean-room-team-review-plus",
+        "fresh": true,
+        "independent": true,
+        "critical": 0,
+        "warning": 0
+      }
+    ],
+    "external_reviews": [
+      {
+        "source": "fresh-session-team-review",
+        "head_sha": "abc123",
+        "review_mode": "team-review-plus",
+        "context_isolated": true,
+        "team_review_skill_loaded": true,
+        "critical": 0,
+        "warning": 0,
+        "proof": "fresh session/team-review output",
+        "artifact_path": "",
+        "reconciled": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "MP Grill Me"
+  short_description: "Stress-test plans one question at a time"
+  default_prompt: "Use $mp-grill-me to grill me on this plan one question at a time."

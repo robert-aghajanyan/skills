@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prompt Caching Optimization"
+  short_description: "Improve LLM cache reuse"
+  default_prompt: "Use $codebase-prompt-caching-optimization to audit this codebase for LLM prompt caching cost and latency improvements."
