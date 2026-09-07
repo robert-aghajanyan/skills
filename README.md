@@ -1,6 +1,6 @@
 # Agent Skills
 
-34 agent skills for Claude Code, shipped as one installable plugin. Deep codebase review across thirteen dimensions, multi-agent PR review and fix loops, plan stress-testing, and the tooling to write more skills.
+49 agent skills for Claude Code, shipped as one installable plugin. Deep codebase review across thirteen dimensions, multi-agent PR review and fix loops, TDD and implementation flows, plan stress-testing, and the tooling to write more skills.
 
 Skills are self-contained folders of instructions, scripts, and reference docs that Claude loads on demand, either because you typed the name or because what you asked for matched the skill's triggers.
 
@@ -31,12 +31,14 @@ claude --plugin-dir ./skills
 
 Not sure which one you want? Run `/which-skill` and describe your situation. It routes over every skill below.
 
+Working in a repo for the first time? Run `/mp-setup` once. It configures the issue tracker, triage labels, and domain doc layout that `mp-to-spec`, `mp-to-tickets`, `mp-triage`, and `mp-wayfinder` assume.
+
 ## Invocation
 
 Every skill is one of two kinds, and the distinction matters:
 
-- **User-invoked** (15 of 34): reachable only when **you type the name**. Everything that deletes, rewrites, commits, publishes, or spends a lot of tokens is user-invoked, so Claude cannot start it on a hunch.
-- **Model-invoked** (19 of 34): Claude can reach for these on its own when what you asked for matches. All of them are read-and-report.
+- **User-invoked** (22 of 49): reachable only when **you type the name**. Everything that deletes, rewrites, commits, publishes, or spends a lot of tokens is user-invoked, so Claude cannot start it on a hunch.
+- **Model-invoked** (27 of 49): Claude can reach for these on its own when what you asked for matches.
 
 See [.agents/invocation.md](.agents/invocation.md) for the rules, and [ADR 0002](.agents/adr/0002-bucket-folders-and-the-promoted-set.md) for why the repo is laid out in buckets.
 
@@ -84,8 +86,14 @@ Daily code work: building, refactoring, researching. ([bucket README](skills/eng
 | Skill | Invocation | What it does |
 |---|---|---|
 | [`codex-collab`](skills/engineering/codex-collab/SKILL.md) | user | Claude and Codex analyze independently, then debate to convergence. A genuine second opinion. |
+| [`mp-implement`](skills/engineering/mp-implement/SKILL.md) | user | Build the work described by a spec or set of tickets, driving TDD at pre-agreed seams and closing out with a review before committing. |
 | [`decompose`](skills/engineering/decompose/SKILL.md) | model | Audit one oversized module, plan a dependency-aware split, and execute it with zero breaking changes. |
-| [`mp-tdd`](skills/engineering/mp-tdd/SKILL.md) | model | Build features and fix bugs test-first, one vertical slice at a time. |
+| [`mp-codebase-design`](skills/engineering/mp-codebase-design/SKILL.md) | model | Shared discipline and vocabulary for designing deep modules: small interfaces, clean seams, testable through the interface. |
+| [`mp-diagnosing-bugs`](skills/engineering/mp-diagnosing-bugs/SKILL.md) | model | Disciplined loop for hard bugs and performance regressions: build a feedback loop that goes red, minimise, hypothesise, instrument, fix, regression-test. |
+| [`mp-prototype`](skills/engineering/mp-prototype/SKILL.md) | model | Build a throwaway prototype to answer a design question: a shareable HTML file for state and logic, or several toggleable UI variations. |
+| [`mp-resolving-merge-conflicts`](skills/engineering/mp-resolving-merge-conflicts/SKILL.md) | model | Work an in-progress merge or rebase hunk by hunk, resolving by intent traced to each side primary source, then finish. Never --abort. |
+| [`mp-tdd`](skills/engineering/mp-tdd/SKILL.md) | model | Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time. |
+| [`mp-wizard`](skills/engineering/mp-wizard/SKILL.md) | model | Generate an interactive bash wizard that walks a human through steps only they can perform: provisioning, credentials, dashboards, one-off migrations. |
 | [`team-research`](skills/engineering/team-research/SKILL.md) | model | Explore a question from several angles with agents that challenge each other's findings. |
 
 ### Planning
@@ -94,12 +102,27 @@ Stress-testing plans and turning them into specs, issues, and handoffs. ([bucket
 
 | Skill | Invocation | What it does |
 |---|---|---|
-| [`mp-grill-me`](skills/planning/mp-grill-me/SKILL.md) | user | Get relentlessly interviewed about a plan, one question at a time, until every branch of the design tree is resolved. |
-| [`mp-grill-with-docs`](skills/planning/mp-grill-with-docs/SKILL.md) | user | Grilling that also challenges your plan against the domain model, sharpening terminology and updating CONTEXT.md and ADRs inline. |
-| [`mp-handoff`](skills/planning/mp-handoff/SKILL.md) | user | Compact the current conversation into a handoff document, saved outside the workspace, so the next session can continue. |
-| [`mp-improve-codebase-architecture`](skills/planning/mp-improve-codebase-architecture/SKILL.md) | user | Find deepening opportunities in a codebase, informed by CONTEXT.md and the decisions in docs/adr/. |
-| [`mp-to-issues`](skills/planning/mp-to-issues/SKILL.md) | user | Break a plan, spec, or PRD into independently-grabbable issues as tracer-bullet vertical slices. |
-| [`mp-to-prd`](skills/planning/mp-to-prd/SKILL.md) | user | Turn the current conversation into a PRD and publish it to the project issue tracker. |
+| [`mp-grill-me`](skills/planning/mp-grill-me/SKILL.md) | user | Get relentlessly interviewed about a plan or design until every branch of the design tree is resolved. |
+| [`mp-grill-with-docs`](skills/planning/mp-grill-with-docs/SKILL.md) | user | Grilling that also builds the domain model, sharpening terminology and updating CONTEXT.md and ADRs inline. |
+| [`mp-improve-codebase-architecture`](skills/planning/mp-improve-codebase-architecture/SKILL.md) | user | Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick. |
+| [`mp-setup`](skills/planning/mp-setup/SKILL.md) | user | Scaffold the per-repo configuration the other skills assume: issue tracker, triage label vocabulary, and domain doc layout. Run once per repo. |
+| [`mp-to-spec`](skills/planning/mp-to-spec/SKILL.md) | user | Turn the current conversation into a spec and publish it to the project issue tracker. |
+| [`mp-to-tickets`](skills/planning/mp-to-tickets/SKILL.md) | user | Break any plan, spec, or conversation into tracer-bullet tickets, each declaring its blocking edges. |
+| [`mp-triage`](skills/planning/mp-triage/SKILL.md) | user | Move issues and external PRs through a state machine of triage roles: categorise, verify, grill if needed, and write agent-ready briefs. |
+| [`mp-wayfinder`](skills/planning/mp-wayfinder/SKILL.md) | user | Plan a chunk of work larger than one agent session as a map of decision tickets on the tracker, resolved one at a time until the way is clear. |
+| [`mp-domain-modeling`](skills/planning/mp-domain-modeling/SKILL.md) | model | Actively build and sharpen the project domain model by challenging terms, stress-testing with scenarios, and updating CONTEXT.md and ADRs inline. |
+| [`mp-grilling`](skills/planning/mp-grilling/SKILL.md) | model | Interview the user in rounds, asking the whole settled frontier of the design tree at once, each question with a recommended answer. |
+
+### Productivity
+
+General workflow tools, not code-specific. ([bucket README](skills/productivity/README.md))
+
+| Skill | Invocation | What it does |
+|---|---|---|
+| [`mp-handoff`](skills/productivity/mp-handoff/SKILL.md) | user | Compact the current conversation into a handoff document so another agent can continue the work. |
+| [`mp-teach`](skills/productivity/mp-teach/SKILL.md) | user | Teach the user a new skill or concept over multiple sessions, using the current directory as a stateful teaching workspace. |
+| [`mp-to-questionnaire`](skills/productivity/mp-to-questionnaire/SKILL.md) | user | Turn a decision you cannot answer alone into a Markdown questionnaire for the one person who can, filled in async or worked through together. |
+| [`mp-wait-what`](skills/productivity/mp-wait-what/SKILL.md) | user | Fire this the moment a message does not land. The agent re-pitches it with the context you are missing, in plain English. |
 
 ### Meta
 
@@ -109,7 +132,14 @@ Skills for building skills and navigating this repo. ([bucket README](skills/met
 |---|---|---|
 | [`skill-builder`](skills/meta/skill-builder/SKILL.md) | user | Create a well-designed skill from scratch, with the frontmatter, structure, and validation this repo expects. |
 | [`which-skill`](skills/meta/which-skill/SKILL.md) | user | Ask which skill or flow fits your situation. A router over every user-reachable skill in this repo. |
+| [`mp-writing-for-agents`](skills/meta/mp-writing-for-agents/SKILL.md) | model | Writing documents for agents: skills, AGENTS.md and CLAUDE.md, and any doc an agent reaches by a pointer. |
 | [`optimize-prompt-caching`](skills/meta/optimize-prompt-caching/SKILL.md) | model | Audit and optimize LLM prompt caching in any codebase: cache_control breakpoints, compaction, cost and latency wins. |
+
+## Credits
+
+The 22 skills prefixed `mp-` are ported from [mattpocock/skills](https://github.com/mattpocock/skills) (MIT), kept in sync with upstream and renamed into this repo's namespace so both plugins can be installed side by side. Each carries its own `LICENSE.txt` with the original copyright notice. Everything else is this repo's own work.
+
+Upstream skills deliberately not ported, because this repo already covers them: `ask-matt` (see `which-skill`), `code-review` (see `team-review`), `research` (see `team-research`).
 
 ## Repository layout
 
@@ -123,7 +153,7 @@ skills/<bucket>/<skill>/
   assets/             optional: templates and examples
 ```
 
-Buckets `codebase-review/`, `pr-review/`, `engineering/`, `planning/`, and `meta/` are **promoted**: the plugin ships exactly those. `in-progress/` and `deprecated/` are public but not shipped.
+Buckets `codebase-review/`, `pr-review/`, `engineering/`, `planning/`, `productivity/`, and `meta/` are **promoted**: the plugin ships exactly those. `in-progress/` and `deprecated/` are public but not shipped.
 
 - [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) is the plugin manifest, and the version in it is what tells installed users an update exists.
 - [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) makes this repo its own single-plugin marketplace.
@@ -144,4 +174,4 @@ All three run in CI on every push and pull request.
 
 ## License
 
-MIT. Each skill also carries its own `LICENSE.txt`.
+MIT for the `mp-` skills (see each one's `LICENSE.txt`), Apache-2.0 for the rest.

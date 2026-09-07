@@ -13,4 +13,5 @@ Reachable only when you type them (Claude Code: `disable-model-invocation: true`
 
 Model- or user-reachable (rich trigger phrasing so the model can reach for them).
 
+- **[mp-writing-for-agents](./mp-writing-for-agents/SKILL.md)**: Writing documents for agents: skills, AGENTS.md and CLAUDE.md, and any doc an agent reaches by a pointer.
 - **[optimize-prompt-caching](./optimize-prompt-caching/SKILL.md)**: Audit and optimize LLM prompt caching in any codebase: cache_control breakpoints, compaction, cost and latency wins.

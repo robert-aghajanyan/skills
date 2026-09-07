@@ -14,12 +14,13 @@ Skills live in bucket folders under `skills/`:
 - `codebase-review/` — dimension-specific deep reviews of an existing repo
 - `pr-review/` — review, fix, and merge-readiness workflows for PRs
 - `engineering/` — daily code work
-- `planning/` — stress-testing plans, turning them into specs and issues
+- `planning/` — stress-testing plans, turning them into specs and tickets
+- `productivity/` — general workflow tools, not code-specific
 - `meta/` — building skills, and navigating this repo
 - `in-progress/` — beta: public on purpose, not shipped in the plugin
 - `deprecated/` — retired, not shipped in the plugin
 
-The first five are **promoted**: the plugin ships exactly those. See [ADR 0002](.agents/adr/0002-bucket-folders-and-the-promoted-set.md).
+The first six are **promoted**: the plugin ships exactly those. See [ADR 0002](.agents/adr/0002-bucket-folders-and-the-promoted-set.md).
 
 Each skill is `skills/<bucket>/<name>/` containing:
 
@@ -40,6 +41,23 @@ Anything that deletes, rewrites, commits, publishes, or spends a lot of tokens i
 
 Operative dependencies on model-invoked skills are written as `Call the Skill tool with "name"` — one skill per call, not a bare `/name`, not a `../other-skill/FILE.md` link.
 
+## Upstream: the mp-* skills
+
+Every skill prefixed `mp-` is a **port** of a skill from [mattpocock/skills](https://github.com/mattpocock/skills) (MIT), not a fork. Content matches upstream byte for byte; only the following are changed, and only these:
+
+- the skill name gains the `mp-` prefix, and cross-skill references are rewritten to our namespace;
+- upstream `code-review`, `research`, and `ask-matt` references point at our `team-review`, `team-research`, and `which-skill`, which is why those three are not ported;
+- `mp-setup` (upstream `setup-matt-pocock-skills`) is debranded, whitelisted in the sync checker.
+
+**Do not hand-edit an `mp-` skill.** A local improvement belongs upstream, or in a new non-`mp-` skill. To re-sync:
+
+```bash
+python3 scripts/check-upstream-sync.py          # summary of drift
+python3 scripts/check-upstream-sync.py --diff   # what actually changed
+```
+
+It clones upstream, reverses our renames, and diffs. Zero drift is the expected state. See [ADR 0004](.agents/adr/0004-mp-skills-are-ports-not-forks.md).
+
 ## Checks
 
 ```bash
@@ -53,6 +71,8 @@ claude plugin validate . --strict
 `check-consistency.py` is the one that catches drift: a promoted skill missing from `plugin.json`, a bucket README, the top-level README, or the `which-skill` map; a non-promoted skill leaking into the plugin; the two manifest versions disagreeing; a skill whose invocation axis differs between harnesses.
 
 All three run in CI ([.github/workflows/ci.yml](.github/workflows/ci.yml)).
+
+`python3 scripts/check-upstream-sync.py` checks the `mp-` ports against upstream.
 
 `python3 skills/engineering/decompose/scripts/verify.py <package_path>` verifies a mixin decomposition (method collisions, MRO, re-exports, line counts).
 

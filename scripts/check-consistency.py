@@ -23,7 +23,7 @@ except ImportError:  # pragma: no cover - CI installs it
     yaml = None
 
 REPO = Path(__file__).resolve().parent.parent
-PROMOTED = {"codebase-review", "pr-review", "engineering", "planning", "meta"}
+PROMOTED = {"codebase-review", "pr-review", "engineering", "planning", "productivity", "meta"}
 ROUTER = REPO / "skills" / "meta" / "which-skill" / "SKILL.md"
 
 errors: list[str] = []

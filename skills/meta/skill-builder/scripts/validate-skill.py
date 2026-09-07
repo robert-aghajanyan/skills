@@ -96,8 +96,14 @@ def validate(skill_dir: str) -> list[str]:
 
     # 7. Referenced files exist
     for match in re.finditer(r"\[.*?\]\(((?!http)[^)]+)\)", content):
-        ref = match.group(1)
-        ref_path = path / ref
+        ref = match.group(1).strip()
+        # In-document anchors point at headings, not files.
+        if ref.startswith("#"):
+            continue
+        # Template placeholders like [<ticket title>](link) name no path.
+        if "/" not in ref and "." not in ref:
+            continue
+        ref_path = path / ref.split("#")[0]
         if not ref_path.exists():
             errors.append(f"Referenced file not found: {ref}")
 

@@ -1,5 +1,5 @@
 interface:
   display_name: "Grill Me"
-  short_description: "Get grilled on a plan until it holds"
+  short_description: "Sharpen a plan through interview"
 policy:
   allow_implicit_invocation: false

@@ -1,0 +1,23 @@
+name: Upstream sync
+
+# The mp-* skills are ports of mattpocock/skills (see ADR 0004). This job
+# reports when upstream has moved ahead, or when someone has hand-edited a
+# port. It runs on a schedule rather than in CI on purpose: upstream moving is
+# news, not a broken build, and it must never block a pull request here.
+
+on:
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+
+jobs:
+  check:
+    name: Check mp-* ports against upstream
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Diff the ports
+        run: python3 scripts/check-upstream-sync.py --diff

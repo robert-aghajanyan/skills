@@ -6,13 +6,13 @@
   },
   "metadata": {
     "description": "Robert Aghajanyan's agent skills, as an installable Claude Code plugin.",
-    "version": "2.0.0"
+    "version": "2.1.0"
   },
   "plugins": [
     {
       "name": "robert-aghajanyan-skills",
       "source": "./",
-      "description": "Agent skills for real engineering: deep codebase review across 13 dimensions, multi-agent PR review and fix loops, plan stress-testing, and skill authoring.",
+      "description": "Agent skills for real engineering: deep codebase review across 13 dimensions, multi-agent PR review and fix loops, TDD and implementation flows, plan stress-testing, and skill authoring.",
       "category": "engineering",
       "keywords": [
         "engineering",
