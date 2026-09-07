@@ -8,14 +8,14 @@ This repo is its own single-plugin marketplace. It is **not** in Claude Code's o
 
 ```bash
 claude plugin marketplace add robert-aghajanyan/skills
-claude plugin install robert-aghajanyan-skills@robert-aghajanyan
+claude plugin install rob@robert-aghajanyan
 ```
 
 Or, from inside a session:
 
 ```
 /plugin marketplace add robert-aghajanyan/skills
-/plugin install robert-aghajanyan-skills@robert-aghajanyan
+/plugin install rob@robert-aghajanyan
 ```
 
 One plugin ships the whole promoted set. Update with `claude plugin marketplace update robert-aghajanyan`.

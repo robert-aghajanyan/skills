@@ -14,7 +14,7 @@ The README also documented `claude install-skill <url>`, which is not a command.
 
 ## Decision
 
-Ship **one** plugin, `robert-aghajanyan-skills`, declared in `.claude-plugin/plugin.json` with an explicit array of skill directory paths.
+Ship **one** plugin, declared in `.claude-plugin/plugin.json` with an explicit array of skill directory paths. It was named `robert-aghajanyan-skills` here; [0005](./0005-the-plugin-is-named-rob.md) renamed it to `rob` in 3.0.0. The count of plugins, not the name, is what this record decides.
 
 `marketplace.json` keeps exactly one plugin entry, making the repo its own single-plugin marketplace. That is the install route today, since this repo is not in the official marketplace.
 
