@@ -1,6 +1,6 @@
 # Agent Skills
 
-49 agent skills for Claude Code, shipped as one installable plugin. Deep codebase review across thirteen dimensions, multi-agent PR review and fix loops, TDD and implementation flows, plan stress-testing, and the tooling to write more skills.
+50 agent skills for Claude Code, shipped as one installable plugin. Deep codebase review across thirteen dimensions, multi-agent PR review and fix loops, TDD and implementation flows, plan stress-testing, and the tooling to write more skills.
 
 Skills are self-contained folders of instructions, scripts, and reference docs that Claude loads on demand, either because you typed the name or because what you asked for matched the skill's triggers.
 
@@ -8,17 +8,17 @@ Skills are self-contained folders of instructions, scripts, and reference docs t
 
 ```bash
 claude plugin marketplace add robert-aghajanyan/skills
-claude plugin install robert-aghajanyan-skills@robert-aghajanyan
+claude plugin install rob@robert-aghajanyan
 ```
 
 Or, from inside a session:
 
 ```
 /plugin marketplace add robert-aghajanyan/skills
-/plugin install robert-aghajanyan-skills@robert-aghajanyan
+/plugin install rob@robert-aghajanyan
 ```
 
-One plugin ships the whole promoted set. Update it with `claude plugin marketplace update robert-aghajanyan`.
+One plugin ships the whole promoted set. Update with `claude plugin marketplace update robert-aghajanyan`.
 
 **Try it without installing:**
 
