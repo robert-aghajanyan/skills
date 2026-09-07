@@ -1,160 +1,147 @@
 # Agent Skills
 
-Public repository for Agent Skills — reusable skill packages for [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
+34 agent skills for Claude Code, shipped as one installable plugin. Deep codebase review across thirteen dimensions, multi-agent PR review and fix loops, plan stress-testing, and the tooling to write more skills.
 
-Skills are folders of instructions, scripts, and resources that Claude loads dynamically for specialized tasks. They extend Claude's capabilities without modifying its core behavior.
+Skills are self-contained folders of instructions, scripts, and reference docs that Claude loads on demand, either because you typed the name or because what you asked for matched the skill's triggers.
 
-## Available Skills
+## Install
 
-33 skills across 7 categories.
+```bash
+claude plugin marketplace add robert-aghajanyan/skills
+claude plugin install robert-aghajanyan-skills@robert-aghajanyan
+```
 
-### Code Quality & Review
+Or, from inside a session:
 
-| Skill | Description |
-|-------|-------------|
-| [decompose](skills/decompose/) | Audit and decompose large modules into smaller, maintainable units |
-| [optimize-prompt-caching](skills/optimize-prompt-caching/) | Audit and optimize LLM prompt caching in any codebase |
+```
+/plugin marketplace add robert-aghajanyan/skills
+/plugin install robert-aghajanyan-skills@robert-aghajanyan
+```
 
-### Codebase Review Suite
+One plugin ships the whole promoted set. Update it with `claude plugin marketplace update robert-aghajanyan`.
 
-Deep, dimension-specific repository reviews, plus an orchestrator that runs them all and files a deduplicated issue backlog.
+**Try it without installing:**
 
-| Skill | Description |
-|-------|-------------|
-| [codebase-review-suite](skills/codebase-review-suite/) | Orchestrate the full codebase review suite and synthesize findings into a deduplicated GitHub issue backlog |
-| [codebase-security-review](skills/codebase-security-review/) | Deep security reviews and threat modeling grounded in exploitability and actual code paths |
-| [codebase-performance-review](skills/codebase-performance-review/) | Performance, scalability, resource usage, and hot-path efficiency risks |
-| [codebase-architecture-review](skills/codebase-architecture-review/) | Architecture and maintainability reviews — YAGNI, KISS, DRY, SOLID, decomposition opportunities |
-| [codebase-reliability-review](skills/codebase-reliability-review/) | Production reliability risks — retries, timeouts, idempotency, concurrency, observability |
-| [codebase-data-correctness-review](skills/codebase-data-correctness-review/) | Correctness risks in calculations, aggregations, reporting, forecasting, and reconciliation logic |
-| [codebase-dependency-supply-chain-review](skills/codebase-dependency-supply-chain-review/) | Dependency, lockfile, license, provenance, and supply-chain risk |
-| [codebase-documentation-review](skills/codebase-documentation-review/) | Documentation accuracy, staleness, and alignment with actual code and behavior |
-| [codebase-frontend-quality-review](skills/codebase-frontend-quality-review/) | Frontend UX quality — accessibility, responsive behavior, state correctness, visual regressions |
-| [codebase-llm-agent-safety-review](skills/codebase-llm-agent-safety-review/) | Safety review for repos using LLMs, agents, tools, MCP servers, or automation |
-| [codebase-developer-experience-review](skills/codebase-developer-experience-review/) | Developer workflow quality — setup, CI clarity, scripts, docs accuracy, debugging ergonomics |
-| [codebase-api-contract-review](skills/codebase-api-contract-review/) | API, CLI, schema, SDK, event, and config compatibility risk |
-| [codebase-test-quality-review](skills/codebase-test-quality-review/) | Test suite quality — regression-catching value, flaky behavior, weak assertions, over-mocking |
-| [codebase-cleanup](skills/codebase-cleanup/) | Evidence-backed cleanup — dead code, unused files, stale scripts, unused dependencies |
-| [codebase-consolidation-cleanup](skills/codebase-consolidation-cleanup/) | Assess unused/duplicate/overlapping implementation paths without modifying files |
-| [codebase-decomposition](skills/codebase-decomposition/) | Audit, plan, and execute behavior-preserving decomposition of large modules |
+```bash
+git clone https://github.com/robert-aghajanyan/skills
+claude --plugin-dir ./skills
+```
 
-### PR Workflow
+## Start here
 
-| Skill | Description |
-|-------|-------------|
-| [team-review](skills/team-review/) | Thorough PR review with 4 specialized agent teams plus independent verification |
-| [team-review-plus](skills/team-review-plus/) | Enhanced evidence-calibrated review — false-positive filtering, confidence calibration |
-| [pr-clean-review](skills/pr-clean-review/) | Fast-strict PR review/fix workflow with evidence-ledger verification and a clean-room final pass |
-| [pr-review-fix](skills/pr-review-fix/) | Iterative review-and-fix loop — 4 reviewer teams, a separate fixer agent, up to 3 rounds |
-| [production-readiness-gate](skills/production-readiness-gate/) | Final conservative production-readiness gate with leadership-safe confidence scores |
+Not sure which one you want? Run `/which-skill` and describe your situation. It routes over every skill below.
+
+## Invocation
+
+Every skill is one of two kinds, and the distinction matters:
+
+- **User-invoked** (15 of 34): reachable only when **you type the name**. Everything that deletes, rewrites, commits, publishes, or spends a lot of tokens is user-invoked, so Claude cannot start it on a hunch.
+- **Model-invoked** (19 of 34): Claude can reach for these on its own when what you asked for matches. All of them are read-and-report.
+
+See [.agents/invocation.md](.agents/invocation.md) for the rules, and [ADR 0002](.agents/adr/0002-bucket-folders-and-the-promoted-set.md) for why the repo is laid out in buckets.
+
+## Skills
+
+### Codebase Review
+
+Dimension-specific deep reviews of an existing repository. ([bucket README](skills/codebase-review/README.md))
+
+| Skill | Invocation | What it does |
+|---|---|---|
+| [`codebase-cleanup`](skills/codebase-review/codebase-cleanup/SKILL.md) | user | Actually remove dead code, stale scripts, unused dependencies, and tracked build artifacts, each backed by evidence. |
+| [`codebase-decomposition`](skills/codebase-review/codebase-decomposition/SKILL.md) | user | Audit, plan, and execute behavior-preserving decomposition of large modules across a repo. |
+| [`codebase-review-suite`](skills/codebase-review/codebase-review-suite/SKILL.md) | user | Run every codebase-* review, then synthesize the findings into one deduplicated GitHub issue backlog. |
+| [`codebase-api-contract-review`](skills/codebase-review/codebase-api-contract-review/SKILL.md) | model | Review API, CLI, schema, SDK, event, and config surfaces for backward-compatibility and breaking-change risk. |
+| [`codebase-architecture-review`](skills/codebase-review/codebase-architecture-review/SKILL.md) | model | Review architecture and maintainability against YAGNI, KISS, DRY, and SOLID, grounded in observed code. |
+| [`codebase-consolidation-cleanup`](skills/codebase-review/codebase-consolidation-cleanup/SKILL.md) | model | Map unused, duplicate, and overlapping implementation paths, and what would break if they were removed. Modifies nothing. |
+| [`codebase-data-correctness-review`](skills/codebase-review/codebase-data-correctness-review/SKILL.md) | model | Check calculations, joins, aggregations, billing, forecasting, migrations, and reconciliation for correctness bugs. |
+| [`codebase-dependency-supply-chain-review`](skills/codebase-review/codebase-dependency-supply-chain-review/SKILL.md) | model | Review dependencies, lockfiles, licenses, provenance, and vendored code for supply-chain risk. |
+| [`codebase-developer-experience-review`](skills/codebase-review/codebase-developer-experience-review/SKILL.md) | model | Review setup, local run commands, test speed, CI clarity, scripts, and everything else that creates maintainer friction. |
+| [`codebase-documentation-review`](skills/codebase-review/codebase-documentation-review/SKILL.md) | model | Check whether the docs, runbooks, and READMEs actually match the code, scripts, CI, and deployment behavior. |
+| [`codebase-frontend-quality-review`](skills/codebase-review/codebase-frontend-quality-review/SKILL.md) | model | Review user-facing quality: accessibility, responsive behavior, state correctness, routing, forms, loading and error states. |
+| [`codebase-llm-agent-safety-review`](skills/codebase-review/codebase-llm-agent-safety-review/SKILL.md) | model | Review LLM, agent, tool, MCP, and retrieval surfaces for prompt injection, trust-boundary, and exfiltration risk. |
+| [`codebase-performance-review`](skills/codebase-review/codebase-performance-review/SKILL.md) | model | Find hot-path, scalability, and resource-usage risks: N+1s, caching gaps, pagination, startup latency. |
+| [`codebase-reliability-review`](skills/codebase-review/codebase-reliability-review/SKILL.md) | model | Surface production failure modes: retries, timeouts, idempotency, concurrency, observability, incident-readiness. |
+| [`codebase-security-review`](skills/codebase-review/codebase-security-review/SKILL.md) | model | Threat-model a repo grounded in exploitability and real code paths: authz, secrets, injection, SSRF, tenant isolation. |
+| [`codebase-test-quality-review`](skills/codebase-review/codebase-test-quality-review/SKILL.md) | model | Judge whether the tests actually catch regressions: weak assertions, over-mocking, flakiness, untested high-risk paths. |
+
+### PR Review
+
+Multi-agent review, fix, and merge-readiness workflows for pull requests. ([bucket README](skills/pr-review/README.md))
+
+| Skill | Invocation | What it does |
+|---|---|---|
+| [`pr-clean-review`](skills/pr-review/pr-clean-review/SKILL.md) | user | One broad review, batched blocker/high fixes, evidence-ledger verification, then a clean-room final review. |
+| [`pr-review-fix`](skills/pr-review/pr-review-fix/SKILL.md) | user | Review, then a separate fixer agent commits fixes for blocker/high findings, then re-review, up to three rounds. Never pushes or merges. |
+| [`production-readiness-gate`](skills/pr-review/production-readiness-gate/SKILL.md) | user | A last conservative pass over a PR, branch, artifact, or report, reporting a calibrated confidence score. |
+| [`team-review`](skills/pr-review/team-review/SKILL.md) | model | Review a PR with four specialized agent teams (security, performance, correctness, guardrails) plus independent verification. |
+| [`team-review-plus`](skills/pr-review/team-review-plus/SKILL.md) | model | team-review plus PR preflight, false-positive filtering, carried-forward finding checks, confidence calibration, and specialist lenses. |
+
+### Engineering
+
+Daily code work: building, refactoring, researching. ([bucket README](skills/engineering/README.md))
+
+| Skill | Invocation | What it does |
+|---|---|---|
+| [`codex-collab`](skills/engineering/codex-collab/SKILL.md) | user | Claude and Codex analyze independently, then debate to convergence. A genuine second opinion. |
+| [`decompose`](skills/engineering/decompose/SKILL.md) | model | Audit one oversized module, plan a dependency-aware split, and execute it with zero breaking changes. |
+| [`mp-tdd`](skills/engineering/mp-tdd/SKILL.md) | model | Build features and fix bugs test-first, one vertical slice at a time. |
+| [`team-research`](skills/engineering/team-research/SKILL.md) | model | Explore a question from several angles with agents that challenge each other's findings. |
 
 ### Planning
 
-| Skill | Description |
-|-------|-------------|
-| [mp-grill-me](skills/mp-grill-me/) | Stress-test a plan through a relentless one-question-at-a-time interview |
-| [mp-grill-with-docs](skills/mp-grill-with-docs/) | Grilling session that also updates CONTEXT.md/ADRs inline as decisions crystallise |
-| [mp-improve-codebase-architecture](skills/mp-improve-codebase-architecture/) | Find deepening opportunities in a codebase, informed by domain language and ADRs |
-| [mp-tdd](skills/mp-tdd/) | Test-driven development with a red-green-refactor loop |
-| [mp-to-prd](skills/mp-to-prd/) | Turn the current conversation context into a PRD and publish it |
-| [mp-to-issues](skills/mp-to-issues/) | Break a plan/spec/PRD into independently-grabbable issues via tracer-bullet vertical slices |
-| [mp-handoff](skills/mp-handoff/) | Create a concise handoff document for a future session, saved outside the workspace |
+Stress-testing plans and turning them into specs, issues, and handoffs. ([bucket README](skills/planning/README.md))
+
+| Skill | Invocation | What it does |
+|---|---|---|
+| [`mp-grill-me`](skills/planning/mp-grill-me/SKILL.md) | user | Get relentlessly interviewed about a plan, one question at a time, until every branch of the design tree is resolved. |
+| [`mp-grill-with-docs`](skills/planning/mp-grill-with-docs/SKILL.md) | user | Grilling that also challenges your plan against the domain model, sharpening terminology and updating CONTEXT.md and ADRs inline. |
+| [`mp-handoff`](skills/planning/mp-handoff/SKILL.md) | user | Compact the current conversation into a handoff document, saved outside the workspace, so the next session can continue. |
+| [`mp-improve-codebase-architecture`](skills/planning/mp-improve-codebase-architecture/SKILL.md) | user | Find deepening opportunities in a codebase, informed by CONTEXT.md and the decisions in docs/adr/. |
+| [`mp-to-issues`](skills/planning/mp-to-issues/SKILL.md) | user | Break a plan, spec, or PRD into independently-grabbable issues as tracer-bullet vertical slices. |
+| [`mp-to-prd`](skills/planning/mp-to-prd/SKILL.md) | user | Turn the current conversation into a PRD and publish it to the project issue tracker. |
 
 ### Meta
 
-| Skill | Description |
-|-------|-------------|
-| [skill-builder](skills/skill-builder/) | Create well-designed Claude Code skills from scratch |
+Skills for building skills and navigating this repo. ([bucket README](skills/meta/README.md))
 
-### Collaboration
+| Skill | Invocation | What it does |
+|---|---|---|
+| [`skill-builder`](skills/meta/skill-builder/SKILL.md) | user | Create a well-designed skill from scratch, with the frontmatter, structure, and validation this repo expects. |
+| [`which-skill`](skills/meta/which-skill/SKILL.md) | user | Ask which skill or flow fits your situation. A router over every user-reachable skill in this repo. |
+| [`optimize-prompt-caching`](skills/meta/optimize-prompt-caching/SKILL.md) | model | Audit and optimize LLM prompt caching in any codebase: cache_control breakpoints, compaction, cost and latency wins. |
 
-| Skill | Description |
-|-------|-------------|
-| [codex-collab](skills/codex-collab/) | Claude + Codex parallel critique loop — both analyze independently, then debate to convergence |
-
-### Business Process & Automation
-
-| Skill | Description |
-|-------|-------------|
-| [team-research](skills/team-research/) | Research and investigation swarm with adversarial debate |
-
-## Installation
-
-### Install all skills
-
-```bash
-claude install-skill https://github.com/robert-aghajanyan/skills
-```
-
-### Install a specific skill
-
-```bash
-claude install-skill https://github.com/robert-aghajanyan/skills/tree/main/skills/decompose
-```
-
-### Install a plugin bundle
-
-The marketplace groups related skills into plugin bundles (see [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json)): `code-quality-skills`, `team-skills`, `meta-skills`, `codebase-review-skills`, `pr-workflow-skills`, `planning-skills`, `collab-skills`. Add this repo as a marketplace source in Claude Code, then install a bundle by name.
-
-## Usage
-
-Once installed, skills are available as slash commands:
+## Repository layout
 
 ```
-/decompose <file path>              # Decompose a large module
-/optimize-prompt-caching            # Audit prompt caching
-/skill-builder                      # Create a new skill
-/team-research <topic>              # Multi-agent research swarm
-/team-review <PR>                   # Multi-agent PR review
-/codebase-review-suite              # Run the full codebase-* review suite
-/codebase-security-review           # Deep security review of a repo
-/pr-review-fix <PR>                 # Iterative PR review-and-fix loop
-/production-readiness-gate <target> # Final readiness gate with confidence scores
-/mp-grill-me <plan>                 # Stress-test a plan via interview
-/mp-tdd                             # Red-green-refactor TDD loop
-/codex-collab <task>                # Claude + Codex cross-model debate
+skills/<bucket>/<skill>/
+  SKILL.md            required: frontmatter + instructions
+  LICENSE.txt         required
+  agents/openai.yaml  required: Codex display metadata and invocation policy
+  references/         optional: detail linked from SKILL.md
+  scripts/            optional: deterministic helpers
+  assets/             optional: templates and examples
 ```
 
-Claude also auto-triggers skills based on natural language — for example, saying "this file is too big, split it up" will activate the decompose skill, and "review this repo for security issues" will activate codebase-security-review.
+Buckets `codebase-review/`, `pr-review/`, `engineering/`, `planning/`, and `meta/` are **promoted**: the plugin ships exactly those. `in-progress/` and `deprecated/` are public but not shipped.
 
-## Skill Structure
-
-Each skill is a self-contained directory under `skills/`:
-
-```
-skills/my-skill/
-  SKILL.md           # Required: frontmatter + instructions
-  LICENSE.txt        # License file
-  references/        # Optional: detailed docs loaded on demand
-  scripts/           # Optional: deterministic helper scripts
-  assets/            # Optional: templates, examples
-```
-
-The core file is `SKILL.md` with YAML frontmatter:
-
-```yaml
----
-name: my-skill
-description: What it does. Use when user says "trigger phrase".
----
-
-# Instructions here
-```
-
-See the [template](template/) directory for a minimal starter, or use `/skill-builder` to create one interactively.
-
-## Specification
-
-For the full Agent Skills specification, see [agentskills.io](https://agentskills.io/specification).
+- [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) is the plugin manifest, and the version in it is what tells installed users an update exists.
+- [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) makes this repo its own single-plugin marketplace.
+- [`spec/agent-skills-spec.md`](spec/agent-skills-spec.md) is a local copy of the Agent Skills specification.
+- [`template/SKILL.md`](template/SKILL.md) is the minimal starter for a new skill.
 
 ## Contributing
 
-1. Fork this repository
-2. Create your skill directory under `skills/`
-3. Include a `SKILL.md` with valid frontmatter and a `LICENSE.txt`
-4. Validate with: `python skills/skill-builder/scripts/validate-skill.py skills/your-skill/`
-5. Submit a pull request
+Read [CLAUDE.md](CLAUDE.md), then:
+
+```bash
+python3 skills/meta/skill-builder/scripts/validate-skill.py skills/<bucket>/<name>/
+python3 scripts/check-consistency.py
+claude plugin validate . --strict
+```
+
+All three run in CI on every push and pull request.
 
 ## License
 
-Individual skills are licensed under the Apache License 2.0 unless otherwise noted. See each skill's `LICENSE.txt` for details.
+MIT. Each skill also carries its own `LICENSE.txt`.

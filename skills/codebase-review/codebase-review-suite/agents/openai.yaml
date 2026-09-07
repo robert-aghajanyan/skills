@@ -1,0 +1,5 @@
+interface:
+  display_name: "Codebase Review Suite"
+  short_description: "Run the full codebase review suite"
+policy:
+  allow_implicit_invocation: false

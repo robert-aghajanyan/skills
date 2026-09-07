@@ -1,0 +1,3 @@
+interface:
+  display_name: "Consolidation Assessment"
+  short_description: "Assess duplicate and unused code paths"

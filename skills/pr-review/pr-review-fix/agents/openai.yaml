@@ -1,0 +1,5 @@
+interface:
+  display_name: "PR Review Fix"
+  short_description: "Iterative PR review-and-fix loop"
+policy:
+  allow_implicit_invocation: false

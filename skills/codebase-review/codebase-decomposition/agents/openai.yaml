@@ -1,0 +1,5 @@
+interface:
+  display_name: "Codebase Decomposition"
+  short_description: "Plan and execute module decomposition"
+policy:
+  allow_implicit_invocation: false

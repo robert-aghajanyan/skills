@@ -1,0 +1,5 @@
+interface:
+  display_name: "Which Skill"
+  short_description: "Find the right skill for your situation"
+policy:
+  allow_implicit_invocation: false

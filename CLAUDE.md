@@ -5,82 +5,78 @@ Guidance for agents (Claude Code, Codex, etc.) working in this repository.
 
 ## What This Repo Is
 
-A public marketplace of **Agent Skills** — reusable skill packages for Claude Code. Skills are self-contained folders of instructions, scripts, and reference docs that Claude loads dynamically via slash commands or auto-triggering.
+A public marketplace of **Agent Skills** — reusable skill packages for Claude Code, shipped as **one** plugin. Skills are self-contained folders of instructions, scripts, and reference docs that Claude loads dynamically.
 
-## Repository Layout
+## Layout
 
-- `skills/<kebab-case-name>/SKILL.md` — **required** frontmatter + instructions.
-- `skills/<kebab-case-name>/LICENSE.txt` — **required** license file for each skill.
-- `skills/*/references/` — optional detailed docs linked from `SKILL.md`.
-- `skills/*/scripts/` — optional deterministic helper scripts.
-- `skills/*/assets/` — optional templates and examples.
-- `template/SKILL.md` — minimal starter for new skills (name + description, nothing else).
-- `spec/agent-skills-spec.md` — local copy of the Agent Skills specification.
-- `.claude-plugin/marketplace.json` — marketplace bundles and skill path metadata.
+Skills live in bucket folders under `skills/`:
 
-There is no package build step.
+- `codebase-review/` — dimension-specific deep reviews of an existing repo
+- `pr-review/` — review, fix, and merge-readiness workflows for PRs
+- `engineering/` — daily code work
+- `planning/` — stress-testing plans, turning them into specs and issues
+- `meta/` — building skills, and navigating this repo
+- `in-progress/` — beta: public on purpose, not shipped in the plugin
+- `deprecated/` — retired, not shipped in the plugin
 
-## Validate a Skill
+The first five are **promoted**: the plugin ships exactly those. See [ADR 0002](.agents/adr/0002-bucket-folders-and-the-promoted-set.md).
+
+Each skill is `skills/<bucket>/<name>/` containing:
+
+- `SKILL.md` — **required.** Frontmatter + instructions. The only file Claude reads when loading the skill; everything else is pulled in on demand.
+- `LICENSE.txt` — **required.**
+- `agents/openai.yaml` — **required.** Codex display metadata and invocation policy.
+- `references/` — optional detail, linked from `SKILL.md`, keeps it under 500 lines.
+- `scripts/` — optional deterministic helpers.
+- `assets/` — optional templates and examples.
+
+Also: `template/SKILL.md` (starter), `spec/agent-skills-spec.md` (local spec copy), `.agents/` (repo conventions and ADRs).
+
+## Invocation: the one axis that splits skills
+
+Every skill is **user-invoked** (`disable-model-invocation: true` plus `policy.allow_implicit_invocation: false` in `agents/openai.yaml`) or **model-invoked** (neither). A skill is user-invoked in both harnesses or neither.
+
+Anything that deletes, rewrites, commits, publishes, or spends a lot of tokens is user-invoked. **No skill can start a user-invoked skill** — only the human can. When a step depends on one, say "tell the user to run `/name`", never "call the Skill tool". Full rules in [.agents/invocation.md](.agents/invocation.md).
+
+Operative dependencies on model-invoked skills are written as `Call the Skill tool with "name"` — one skill per call, not a bare `/name`, not a `../other-skill/FILE.md` link.
+
+## Checks
 
 ```bash
-python skills/skill-builder/scripts/validate-skill.py skills/<skill-name>/
+python3 skills/meta/skill-builder/scripts/validate-skill.py skills/<bucket>/<name>/
+python3 scripts/check-consistency.py
+claude plugin validate . --strict
 ```
 
-Checks: SKILL.md exists with valid frontmatter, kebab-case name (max 64 chars, no "claude"/"anthropic"), description under 1024 chars with no XML tags, body under 500 lines, referenced files exist, and Gotchas section present.
+`validate-skill.py` checks frontmatter, kebab-case name (max 64 chars, no "claude"/"anthropic"), description under 1024 chars with no XML tags, body under 500 lines, referenced files exist, and a Gotchas section.
 
-## Verify a Mixin Decomposition
+`check-consistency.py` is the one that catches drift: a promoted skill missing from `plugin.json`, a bucket README, the top-level README, or the `which-skill` map; a non-promoted skill leaking into the plugin; the two manifest versions disagreeing; a skill whose invocation axis differs between harnesses.
 
-```bash
-python skills/decompose/scripts/verify.py <package_path>
-```
+All three run in CI ([.github/workflows/ci.yml](.github/workflows/ci.yml)).
 
-Checks method collisions across mixins, MRO validity, re-exports, and line counts.
+`python3 skills/engineering/decompose/scripts/verify.py <package_path>` verifies a mixin decomposition (method collisions, MRO, re-exports, line counts).
 
-## Architecture
+## Adding a Skill
 
-### Skill anatomy
+1. Pick a bucket. Create `skills/<bucket>/<kebab-case-name>/` with `SKILL.md`, `LICENSE.txt`, and `agents/openai.yaml`.
+2. Decide the invocation axis and set it in **both** files.
+3. Model-invoked descriptions carry rich trigger phrasing ("Use when..."). User-invoked descriptions are a human-facing one-liner.
+4. Include a Gotchas section (even one item). Keep the body under 500 lines.
+5. If promoted, add it to `.claude-plugin/plugin.json`, its bucket `README.md`, the top-level `README.md`, and the map in `skills/meta/which-skill/SKILL.md`.
+6. Run the three checks above. If it ships scripts, run them against a realistic fixture and note the command in the PR.
 
-- `SKILL.md` is the only file Claude Code reads by default when loading a skill. Everything else is pulled in on demand.
-- `references/` keeps `SKILL.md` under 500 lines — link to it rather than inlining long explanations.
-- `scripts/` holds deterministic logic (e.g. `validate-skill.py`, `verify.py`) so Claude doesn't reinvent it each invocation.
-- `assets/` holds templates and examples for Claude to copy and adapt.
+The `which-skill` router lies the moment a skill is added, renamed, or removed without updating it. Re-read it whenever the set changes.
 
-### Key frontmatter fields
+## Releasing
 
-Defined in `skills/skill-builder/references/frontmatter-reference.md`. The important ones:
+One version number, in `.claude-plugin/plugin.json`; `marketplace.json`'s `metadata.version` mirrors it. Bump both together and tag. Claude Code uses the plugin `version` to decide when installed users see an update. See [ADR 0003](.agents/adr/0003-version-lives-only-in-plugin-json.md).
 
-- `description` — How Claude decides when to auto-trigger the skill. Must include trigger phrases ("Use when...").
-- `allowed-tools` — Tools Claude can use without permission prompts when the skill is active. Keep as narrow as possible.
-- `disable-model-invocation: true` — Only user can invoke (for side-effect-heavy skills).
-- `context: fork` — Runs in isolated subagent without conversation history.
+## Style
 
-### Variable substitutions in SKILL.md
+Kebab-case for skill directories and frontmatter names. Markdown: short sections, direct instructions, fenced code blocks. Python helpers: standard-library-first, deterministic. Conventional Commits, imperative mood.
 
-- `$ARGUMENTS` — Args passed after the skill name.
-- `${CLAUDE_SKILL_DIR}` — Directory containing the SKILL.md file.
-- `` !`command` `` — Dynamic context injection (shell command output replaces the placeholder).
-
-### Marketplace packaging
-
-`.claude-plugin/marketplace.json` groups skills into named plugin bundles for bulk installation. Each plugin lists skill paths relative to repo root. A skill may appear in more than one bundle. Update this file when adding, removing, or regrouping published skills.
-
-## Style Conventions
-
-Kebab-case for skill directories and frontmatter names — `skills/team-review/` with `name: team-review`. Markdown: short sections, direct instructions, fenced code blocks for commands. Python helpers: standard-library-first, deterministic.
-
-## Contributing a New Skill
-
-1. Create `skills/<kebab-case-name>/` with a `SKILL.md` and `LICENSE.txt`.
-2. Description must include "Use when..." trigger phrases.
-3. Include a Gotchas section (even one item).
-4. Keep SKILL.md body under 500 lines; move detail to `references/`.
-5. Add the skill to the appropriate bundle(s) in `.claude-plugin/marketplace.json` and to `README.md`.
-6. Run `validate-skill.py` on it. If it ships scripts, run them against a realistic fixture and note the command in the PR.
-
-## Commit & PR Guidelines
-
-Conventional Commit style, imperative mood — `feat: add api-audit skill`, `fix: update team-review trigger`. PRs should state the affected skill directories, the validation commands run, and their results. Keep generated artifacts out of the repo unless they are intentional examples under `assets/`.
+Install wording is copied verbatim from [.agents/install-block.md](.agents/install-block.md). Change it there first, then propagate. `claude install-skill` is not a command; never write it.
 
 ## Security
 
-Never commit secrets, tokens, private repository URLs, or machine-specific paths. Local agent state (`.claude/settings.local.json`, `.codex/`) is gitignored — keep it that way.
+Never commit secrets, tokens, private repository URLs, or machine-specific paths — no `/Users/<name>/...` in a skill, use `${CLAUDE_SKILL_DIR}`. Keep `allowed-tools` as narrow as possible. Local agent state (`.claude/settings.local.json`, `.codex/`) is gitignored; keep it that way.

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Grill Me"
+  short_description: "Get grilled on a plan until it holds"
+policy:
+  allow_implicit_invocation: false

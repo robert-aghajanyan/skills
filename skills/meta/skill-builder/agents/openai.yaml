@@ -1,0 +1,5 @@
+interface:
+  display_name: "Skill Builder"
+  short_description: "Create a new Claude Code skill"
+policy:
+  allow_implicit_invocation: false

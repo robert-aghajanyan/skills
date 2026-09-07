@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    name: Validate skills and manifests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Validate every skill
+        run: |
+          fail=0
+          for d in skills/*/*/; do
+            [ -f "$d/SKILL.md" ] || continue
+            if ! python3 skills/meta/skill-builder/scripts/validate-skill.py "$d"; then
+              fail=1
+            fi
+          done
+          exit $fail
+
+      - name: Check manifest, README and router consistency
+        run: python3 scripts/check-consistency.py
+
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Validate marketplace manifest
+        run: claude plugin validate . --strict
+
+      - name: Validate plugin manifest
+        run: claude plugin validate .claude-plugin/plugin.json

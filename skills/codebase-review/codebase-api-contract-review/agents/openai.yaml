@@ -1,0 +1,3 @@
+interface:
+  display_name: "API Contract Review"
+  short_description: "API, schema and contract compatibility review"

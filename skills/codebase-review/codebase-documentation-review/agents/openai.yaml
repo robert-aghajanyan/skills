@@ -1,0 +1,3 @@
+interface:
+  display_name: "Documentation Review"
+  short_description: "Docs accuracy and staleness review"

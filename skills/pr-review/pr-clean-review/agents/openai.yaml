@@ -1,0 +1,5 @@
+interface:
+  display_name: "PR Clean Review"
+  short_description: "Fast-strict PR clean-and-fix loop"
+policy:
+  allow_implicit_invocation: false

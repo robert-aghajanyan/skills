@@ -1,0 +1,5 @@
+interface:
+  display_name: "Improve Architecture"
+  short_description: "Find and act on deepening opportunities"
+policy:
+  allow_implicit_invocation: false

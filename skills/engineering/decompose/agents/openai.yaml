@@ -1,0 +1,3 @@
+interface:
+  display_name: "Decompose"
+  short_description: "Split a large module into smaller units"

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Codex Collab"
+  short_description: "Claude and Codex cross-model debate"
+policy:
+  allow_implicit_invocation: false

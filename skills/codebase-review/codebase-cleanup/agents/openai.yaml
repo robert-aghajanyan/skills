@@ -1,0 +1,5 @@
+interface:
+  display_name: "Codebase Cleanup"
+  short_description: "Evidence-backed codebase cleanup"
+policy:
+  allow_implicit_invocation: false

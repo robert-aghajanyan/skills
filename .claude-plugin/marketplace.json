@@ -1,104 +1,28 @@
 {
-  "name": "robert-aghajanyan-agent-skills",
+  "name": "robert-aghajanyan",
   "owner": {
     "name": "Robert Aghajanyan",
     "url": "https://github.com/robert-aghajanyan"
   },
   "metadata": {
-    "description": "Agent skills for Claude Code — code quality, research, review, and skill creation",
-    "version": "1.1.0"
+    "description": "Robert Aghajanyan's agent skills, as an installable Claude Code plugin.",
+    "version": "2.0.0"
   },
   "plugins": [
     {
-      "name": "code-quality-skills",
-      "description": "Collection of code quality and review skills: module decomposition, prompt caching optimization, and multi-agent PR review.",
+      "name": "robert-aghajanyan-skills",
       "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/decompose",
-        "./skills/optimize-prompt-caching",
-        "./skills/team-review"
-      ]
-    },
-    {
-      "name": "team-skills",
-      "description": "Multi-agent team skills: adversarial research swarms and thorough PR review with specialized agent teams.",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/team-research",
-        "./skills/team-review"
-      ]
-    },
-    {
-      "name": "meta-skills",
-      "description": "Skills for building and optimizing skills and LLM workflows.",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/skill-builder",
-        "./skills/optimize-prompt-caching"
-      ]
-    },
-    {
-      "name": "codebase-review-skills",
-      "description": "Deep, dimension-specific repository review skills — security, performance, architecture, reliability, data correctness, dependencies, docs, frontend, LLM/agent safety, developer experience, API contracts, test quality, and cleanup — plus a suite orchestrator that runs them all and files a deduplicated issue backlog.",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/codebase-review-suite",
-        "./skills/codebase-security-review",
-        "./skills/codebase-performance-review",
-        "./skills/codebase-architecture-review",
-        "./skills/codebase-reliability-review",
-        "./skills/codebase-data-correctness-review",
-        "./skills/codebase-dependency-supply-chain-review",
-        "./skills/codebase-documentation-review",
-        "./skills/codebase-frontend-quality-review",
-        "./skills/codebase-llm-agent-safety-review",
-        "./skills/codebase-developer-experience-review",
-        "./skills/codebase-api-contract-review",
-        "./skills/codebase-test-quality-review",
-        "./skills/codebase-cleanup",
-        "./skills/codebase-consolidation-cleanup",
-        "./skills/codebase-decomposition"
-      ]
-    },
-    {
-      "name": "pr-workflow-skills",
-      "description": "PR review and merge-readiness workflows: team review, evidence-calibrated enhanced review, fast-strict clean/fix loops, iterative review-and-fix, and a final production-readiness gate.",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/team-review",
-        "./skills/team-review-plus",
-        "./skills/pr-clean-review",
-        "./skills/pr-review-fix",
-        "./skills/production-readiness-gate"
-      ]
-    },
-    {
-      "name": "planning-skills",
-      "description": "Plan-stress-testing and delivery-shaping skills: adversarial interviews against a plan, TDD red-green-refactor, architecture-deepening passes, and turning plans/context into PRDs or tracer-bullet issues.",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/mp-grill-me",
-        "./skills/mp-grill-with-docs",
-        "./skills/mp-improve-codebase-architecture",
-        "./skills/mp-tdd",
-        "./skills/mp-to-prd",
-        "./skills/mp-to-issues",
-        "./skills/mp-handoff"
-      ]
-    },
-    {
-      "name": "collab-skills",
-      "description": "Cross-model collaboration: a parallel Claude + Codex critique loop that debates to convergence.",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/codex-collab"
+      "description": "Agent skills for real engineering: deep codebase review across 13 dimensions, multi-agent PR review and fix loops, plan stress-testing, and skill authoring.",
+      "category": "engineering",
+      "keywords": [
+        "engineering",
+        "skills",
+        "code-review",
+        "security-review",
+        "pr-review",
+        "tdd",
+        "planning",
+        "refactoring"
       ]
     }
   ]

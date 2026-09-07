@@ -1,0 +1,5 @@
+interface:
+  display_name: "Production Readiness Gate"
+  short_description: "Final production-readiness gate"
+policy:
+  allow_implicit_invocation: false
