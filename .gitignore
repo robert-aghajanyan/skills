@@ -7,3 +7,7 @@ __pycache__/
 dist/
 build/
 .env
+
+# Local agent/editor state (machine-specific, not part of the marketplace)
+.claude/settings.local.json
+.codex/
