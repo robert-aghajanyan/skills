@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Robert Aghajanyan's agent skills, as an installable Claude Code plugin.",
-    "version": "2.1.0"
+    "version": "2.2.0"
   },
   "plugins": [
     {

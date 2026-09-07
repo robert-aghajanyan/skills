@@ -119,6 +119,7 @@ General workflow tools, not code-specific. ([bucket README](skills/productivity/
 
 | Skill | Invocation | What it does |
 |---|---|---|
+| [`humanizer`](skills/productivity/humanizer/SKILL.md) | user | Rewrite AI-sounding text so it reads like the writer without changing what it says. 25 tells from Wikipedia's "Signs of AI writing", graded by strength. |
 | [`mp-handoff`](skills/productivity/mp-handoff/SKILL.md) | user | Compact the current conversation into a handoff document so another agent can continue the work. |
 | [`mp-teach`](skills/productivity/mp-teach/SKILL.md) | user | Teach the user a new skill or concept over multiple sessions, using the current directory as a stateful teaching workspace. |
 | [`mp-to-questionnaire`](skills/productivity/mp-to-questionnaire/SKILL.md) | user | Turn a decision you cannot answer alone into a Markdown questionnaire for the one person who can, filled in async or worked through together. |

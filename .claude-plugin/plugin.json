@@ -1,6 +1,6 @@
 {
   "name": "robert-aghajanyan-skills",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Agent skills for real engineering: deep codebase review across 13 dimensions, multi-agent PR review and fix loops, TDD and implementation flows, plan stress-testing, and skill authoring.",
   "author": {
     "name": "Robert Aghajanyan",
@@ -65,6 +65,7 @@
     "./skills/productivity/mp-teach",
     "./skills/productivity/mp-to-questionnaire",
     "./skills/productivity/mp-wait-what",
+    "./skills/productivity/humanizer",
     "./skills/meta/skill-builder",
     "./skills/meta/which-skill",
     "./skills/meta/mp-writing-for-agents",

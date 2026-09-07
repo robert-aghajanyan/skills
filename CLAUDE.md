@@ -58,6 +58,26 @@ python3 scripts/check-upstream-sync.py --diff   # what actually changed
 
 It clones upstream, reverses our renames, and diffs. Zero drift is the expected state. See [ADR 0004](.agents/adr/0004-mp-skills-are-ports-not-forks.md).
 
+## Upstream: humanizer
+
+`skills/productivity/humanizer` is a port of [blader/humanizer](https://github.com/blader/humanizer) (MIT, Siqi Chen), on the same terms as the `mp-` skills: `SKILL.md` and `agents/openai.yaml` match upstream byte for byte once two deliberate edits are undone. Nothing is renamed, so there is no rename reversal. The `metadata.version` is upstream's, not ours.
+
+The two edits, both listed in `LOCAL_EDITS` in the sync checker, exist to make the skill **user-invoked** here. Upstream ships it model-invoked, but its file mode rewrites a file, so the rule above applies:
+
+- `SKILL.md` gains `disable-model-invocation: true`.
+- `agents/openai.yaml` gains `policy.allow_implicit_invocation: false`.
+
+The description keeps upstream's trigger phrasing rather than the human-facing one-liner a user-invoked skill would normally get. That costs nothing when nothing can auto-invoke it, and it keeps the diff to those two lines.
+
+**Do not hand-edit it otherwise.** A local improvement belongs upstream, or in a new skill. To check drift:
+
+```bash
+python3 scripts/check-humanizer-sync.py          # summary of drift
+python3 scripts/check-humanizer-sync.py --diff   # what actually changed
+```
+
+One more waiver: `validate-skill.py` warns that it has no Gotchas section. Upstream calls that section "When not to act". The warning is waived, not fixed.
+
 ## Checks
 
 ```bash
@@ -73,6 +93,8 @@ claude plugin validate . --strict
 All three run in CI ([.github/workflows/ci.yml](.github/workflows/ci.yml)).
 
 `python3 scripts/check-upstream-sync.py` checks the `mp-` ports against upstream.
+
+`python3 scripts/check-humanizer-sync.py` checks the `humanizer` port against its own upstream.
 
 `python3 skills/engineering/decompose/scripts/verify.py <package_path>` verifies a mixin decomposition (method collisions, MRO, re-exports, line counts).
 

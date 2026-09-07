@@ -6,6 +6,7 @@ General workflow tools, not code-specific.
 
 Reachable only when you type them (Claude Code: `disable-model-invocation: true`; Codex: `policy.allow_implicit_invocation: false` in `agents/openai.yaml`).
 
+- **[humanizer](./humanizer/SKILL.md)**: Rewrite AI-sounding text so it reads like the writer without changing what it says.
 - **[mp-handoff](./mp-handoff/SKILL.md)**: Compact the current conversation into a handoff document so another agent can continue the work.
 - **[mp-teach](./mp-teach/SKILL.md)**: Teach the user a new skill or concept over multiple sessions, using the current directory as a stateful teaching workspace.
 - **[mp-to-questionnaire](./mp-to-questionnaire/SKILL.md)**: Turn a decision you cannot answer alone into a Markdown questionnaire for the one person who can, filled in async or worked through together.
