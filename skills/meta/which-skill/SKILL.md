@@ -107,6 +107,7 @@ General workflow tools, not code-specific.
 
 **User-invoked**
 
+- `humanizer`: Rewrite AI-sounding text so it reads like the writer without changing what it says. Numbered tells, strongest first.
 - `mp-handoff`: Compact the current conversation into a handoff document so another agent can continue the work.
 - `mp-teach`: Teach the user a new skill or concept over multiple sessions, using the current directory as a stateful teaching workspace.
 - `mp-to-questionnaire`: Turn a decision you cannot answer alone into a Markdown questionnaire for the one person who can, filled in async or worked through together.
@@ -139,6 +140,7 @@ Skills for building skills and navigating this repo.
 - **"This file is 3000 lines."** `decompose` for one file. `codebase-decomposition` for a repo-wide pass.
 - **"I'm running out of context."** `mp-handoff`.
 - **"I did not understand what you just said."** `mp-wait-what`.
+- **"This draft sounds like a chatbot wrote it."** `humanizer`.
 - **"I want a second opinion from a different model."** `codex-collab`.
 
 ## First run in a repo
