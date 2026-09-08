@@ -1,6 +1,7 @@
 ---
 name: codebase-llm-agent-safety-review
 description: Review repositories that use LLMs, agents, tools, MCP servers, plugins, retrieval, memory, file access, browser access, code execution, or automation for safety, trust-boundary, and abuse risks. Use when the user asks for LLM safety review, agent safety, prompt injection review, tool permission review, MCP/plugin safety, RAG safety, memory safety, data exfiltration review, model guardrails, or whether an agentic system can be abused.
+disable-model-invocation: true
 ---
 
 # LLM Agent Safety Review

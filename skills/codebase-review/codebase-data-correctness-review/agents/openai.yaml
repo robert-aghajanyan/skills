@@ -1,3 +1,5 @@
 interface:
   display_name: "Data Correctness Review"
   short_description: "Calculation and data-correctness review"
+policy:
+  allow_implicit_invocation: false

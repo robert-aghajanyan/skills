@@ -1,3 +1,5 @@
 interface:
   display_name: "Team Review Plus"
   short_description: "Evidence-calibrated deep PR review"
+policy:
+  allow_implicit_invocation: false

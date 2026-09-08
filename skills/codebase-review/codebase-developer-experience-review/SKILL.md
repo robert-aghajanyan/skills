@@ -1,6 +1,7 @@
 ---
 name: codebase-developer-experience-review
 description: "Review any repository for developer workflow quality: setup, local run commands, test speed, CI clarity, scripts, docs accuracy, environment handling, debugging ergonomics, and maintainer friction. Use when the user asks for developer experience review, repo onboarding, local setup issues, CI cleanup, Makefile/script quality, test speed, docs accuracy, confusing commands, environment setup, or maintainer ergonomics."
+disable-model-invocation: true
 ---
 
 # Codebase Developer Experience Review

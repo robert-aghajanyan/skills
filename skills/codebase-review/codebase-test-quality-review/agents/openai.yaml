@@ -1,3 +1,5 @@
 interface:
   display_name: "Test Quality Review"
   short_description: "Test suite quality and coverage review"
+policy:
+  allow_implicit_invocation: false

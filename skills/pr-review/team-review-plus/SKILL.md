@@ -1,6 +1,7 @@
 ---
 name: team-review-plus
 description: Enhanced evidence-calibrated PR review using team-review's core lenses plus PR preflight, false-positive filtering, carried-forward finding checks, confidence calibration, and optional specialist lenses. Use when the user explicitly invokes team-review-plus, asks for an enhanced/deep PR review, wants a false-positive-calibrated review, or wants specialist review lenses before merging.
+disable-model-invocation: true
 ---
 
 # Team Review Plus

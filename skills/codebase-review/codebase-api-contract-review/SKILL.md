@@ -1,6 +1,7 @@
 ---
 name: codebase-api-contract-review
 description: Review repositories for API, CLI, schema, SDK, event, config, plugin, and data-contract compatibility risks. Use when the user asks for API compatibility, contract review, backward compatibility, schema changes, CLI compatibility, SDK behavior, event/message contracts, config migration, public interfaces, or breaking-change analysis.
+disable-model-invocation: true
 ---
 
 # Codebase API Contract Review
