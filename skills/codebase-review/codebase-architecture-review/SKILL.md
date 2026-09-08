@@ -1,6 +1,7 @@
 ---
 name: codebase-architecture-review
 description: Perform deep repository architecture and maintainability reviews grounded in observed code. Use when the user asks to review a repo or codebase for architecture quality, YAGNI, KISS, DRY, SOLID, maintainability, decomposition opportunities, over-complex modules, duplicated logic, unclear boundaries, or client/region/provider/tenant/agent-specific branching.
+disable-model-invocation: true
 ---
 
 # Codebase Architecture Review

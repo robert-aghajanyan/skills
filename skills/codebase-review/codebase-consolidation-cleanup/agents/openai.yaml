@@ -1,3 +1,5 @@
 interface:
   display_name: "Consolidation Assessment"
   short_description: "Assess duplicate and unused code paths"
+policy:
+  allow_implicit_invocation: false

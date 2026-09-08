@@ -1,6 +1,7 @@
 ---
 name: codebase-security-review
 description: Perform deep security reviews and threat modeling grounded in exploitability and actual code paths. Use when the user asks for a security review, threat model, exploitability check, auth/authz audit, secrets review, tenant isolation review, injection review, SSRF/path traversal review, dependency trust review, agent security review, or whether a change can be abused or bypassed.
+disable-model-invocation: true
 ---
 
 # Security Review

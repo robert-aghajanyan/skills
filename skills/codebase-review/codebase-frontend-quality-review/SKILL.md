@@ -1,6 +1,7 @@
 ---
 name: codebase-frontend-quality-review
 description: Review frontend codebases for user-facing quality, accessibility, responsive behavior, state correctness, visual regressions, routing issues, form behavior, and interaction quality. Use when the user asks for frontend quality review, UI review, accessibility review, responsive review, visual regression risk, loading/error states, form UX, state bugs, routing bugs, or frontend maintainability.
+disable-model-invocation: true
 ---
 
 # Frontend Quality Review

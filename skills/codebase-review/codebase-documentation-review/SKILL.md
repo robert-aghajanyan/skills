@@ -1,6 +1,7 @@
 ---
 name: codebase-documentation-review
 description: Review repository documentation for accuracy, completeness, staleness, operational usefulness, and alignment with actual code, scripts, CI, configuration, APIs, and deployment behavior. Use when the user asks for documentation review, docs accuracy, stale docs, runbook review, README review, setup docs, operational docs, API docs, examples, command verification, or whether documentation matches the codebase.
+disable-model-invocation: true
 ---
 
 # Codebase Documentation Review

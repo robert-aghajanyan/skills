@@ -1,3 +1,5 @@
 interface:
   display_name: "LLM Agent Safety Review"
   short_description: "LLM and agent safety review"
+policy:
+  allow_implicit_invocation: false

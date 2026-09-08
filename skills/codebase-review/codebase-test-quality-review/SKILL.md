@@ -1,6 +1,7 @@
 ---
 name: codebase-test-quality-review
 description: Reviews test suites for regression-catching value, risk coverage, flaky behavior, weak assertions, over-mocking, and CI confidence. Use when the user asks to review tests, improve test quality, find missing coverage, assess flaky tests, check whether tests catch regressions, or identify high-risk code paths without meaningful tests.
+disable-model-invocation: true
 ---
 
 # Test Quality Review

@@ -1,3 +1,5 @@
 interface:
   display_name: "Frontend Quality Review"
   short_description: "Frontend, UI and accessibility review"
+policy:
+  allow_implicit_invocation: false

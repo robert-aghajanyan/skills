@@ -3,6 +3,7 @@ name: team-research
 description: Research and investigation swarm with adversarial debate. Spawns agents to explore a question from different angles and challenge each other's findings. Use when user says "research this", "investigate", "deep dive", "explore options", or needs bug investigation, architecture research, or technology evaluation from multiple perspectives.
 argument-hint: "<question, bug description, or research topic>"
 allowed-tools: Read, Grep, Glob, Bash, Agent, TeamCreate, TeamDelete, TaskCreate, TaskUpdate, TaskList, TaskGet, SendMessage, WebSearch, WebFetch
+disable-model-invocation: true
 ---
 
 # Research and Investigation Swarm

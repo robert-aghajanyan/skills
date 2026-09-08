@@ -1,6 +1,7 @@
 ---
 name: codebase-dependency-supply-chain-review
 description: Review repositories for dependency, package, lockfile, license, provenance, and software supply-chain risk. Use when the user asks for dependency review, supply-chain review, package risk, lockfile hygiene, license review, dependency freshness, vulnerable dependencies, package provenance, vendored code, or dependency cleanup.
+disable-model-invocation: true
 ---
 
 # Dependency Supply-Chain Review

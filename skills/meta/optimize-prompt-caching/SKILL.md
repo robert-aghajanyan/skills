@@ -3,6 +3,7 @@ name: optimize-prompt-caching
 description: Audit and optimize LLM prompt caching in any codebase. Use when you want to reduce LLM API costs, improve latency, add cache_control breakpoints, implement compaction, or apply prompt caching best practices from the Claude Code team's article.
 argument-hint: "[audit|implement]"
 allowed-tools: Read, Grep, Glob, Edit, Write, Bash, Agent
+disable-model-invocation: true
 ---
 
 # Prompt Caching Optimizer

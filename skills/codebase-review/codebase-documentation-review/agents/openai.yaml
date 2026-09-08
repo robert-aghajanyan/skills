@@ -1,3 +1,5 @@
 interface:
   display_name: "Documentation Review"
   short_description: "Docs accuracy and staleness review"
+policy:
+  allow_implicit_invocation: false

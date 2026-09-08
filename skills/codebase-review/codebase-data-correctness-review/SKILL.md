@@ -1,6 +1,7 @@
 ---
 name: codebase-data-correctness-review
 description: Review repositories for correctness risks in calculations, data transformations, joins, aggregations, reporting, forecasting, billing, cost, metrics, migrations, and reconciliation logic. Use when the user asks for data correctness, calculation review, reporting accuracy, aggregation review, financial/cost/math logic, forecast logic, ETL validation, reconciliation, rounding, joins, migrations, or metric correctness.
+disable-model-invocation: true
 ---
 
 # Data Correctness Review

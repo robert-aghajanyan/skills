@@ -1,6 +1,7 @@
 ---
 name: codebase-reliability-review
 description: Reviews production reliability risks across repositories, services, pipelines, CLIs, agents, workers, APIs, and distributed systems. Use when the user asks for production-readiness, reliability, resilience, failure-mode analysis, retries, timeouts, idempotency, concurrency, observability, operational risk, or incident-readiness review.
+disable-model-invocation: true
 ---
 
 # Reliability Review

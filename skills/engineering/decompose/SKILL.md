@@ -3,6 +3,7 @@ name: decompose
 description: Audit and decompose large modules into smaller, maintainable units. Use when user mentions "split", "decompose", "refactor", "monolith", "god class", "too big", "too many lines", or wants to break a large file into smaller ones. Identifies decomposition patterns, plans dependency-aware refactoring, and executes with zero breaking changes.
 argument-hint: "<file path, 'audit', or 'plan'>"
 allowed-tools: Read, Grep, Glob, Bash, Agent, Write, Edit, AskUserQuestion, EnterPlanMode, ExitPlanMode
+disable-model-invocation: true
 ---
 
 # Module Decomposition

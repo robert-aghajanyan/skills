@@ -1,6 +1,7 @@
 ---
 name: codebase-consolidation-cleanup
 description: Assess unused, duplicate, or overlapping implementation paths in large codebases without modifying files. Use when the user asks to assess cleanup opportunities, identify unused modules/functions/artifacts, evaluate duplicate implementations, map wrapper/runner/output sprawl, or understand what would break if stale code is removed.
+disable-model-invocation: true
 ---
 
 # Codebase Consolidation Cleanup

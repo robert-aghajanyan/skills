@@ -1,6 +1,7 @@
 ---
 name: codebase-performance-review
 description: Review repositories for performance, scalability, resource usage, and hot-path efficiency risks. Use when the user asks for performance review, scalability review, hot-path analysis, N+1 calls, memory usage, expensive loops, caching, pagination, startup latency, slow tests, inefficient data processing, or code that may not scale.
+disable-model-invocation: true
 ---
 
 # Performance Review
