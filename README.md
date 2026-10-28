@@ -99,7 +99,7 @@ General workflow tools, not code-specific. ([bucket README](skills/productivity/
 
 | Skill | Invocation | What it does |
 |---|---|---|
-| [`humanizer`](skills/productivity/humanizer/SKILL.md) | user | Rewrite AI-sounding text so it reads like the writer without changing what it says. 25 tells from Wikipedia's "Signs of AI writing", graded by strength. |
+| [`humanizer`](skills/productivity/humanizer/SKILL.md) | model | Rewrite AI-sounding text so it reads like the writer without changing what it says. 25 tells from Wikipedia's "Signs of AI writing", graded by strength. |
 
 ### Meta
 

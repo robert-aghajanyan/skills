@@ -82,7 +82,7 @@ Nothing here yet. See the last flow below.
 
 General workflow tools, not code-specific.
 
-**User-invoked**
+**Model-invoked**
 
 - `humanizer`: Rewrite AI-sounding text so it reads like the writer without changing what it says. Numbered tells, strongest first.
 

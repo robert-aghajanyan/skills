@@ -47,14 +47,9 @@ Versions before 4.0.0 shipped ports of Matt Pocock's skills under an `mp-` prefi
 
 ## Upstream: humanizer
 
-`skills/productivity/humanizer` is a port of [blader/humanizer](https://github.com/blader/humanizer) (MIT, Siqi Chen), as a **port**, not a fork: `SKILL.md` and `agents/openai.yaml` match upstream byte for byte once two deliberate edits are undone. Nothing is renamed, so there is no rename reversal. The `metadata.version` is upstream's, not ours.
+`skills/productivity/humanizer` is a port of [blader/humanizer](https://github.com/blader/humanizer) (MIT, Siqi Chen), as a **port**, not a fork: `SKILL.md` and `agents/openai.yaml` match upstream byte for byte, with no local edits. Nothing is renamed, so there is no rename reversal. The `metadata.version` is upstream's, not ours.
 
-The two edits, both listed in `LOCAL_EDITS` in the sync checker, exist to make the skill **user-invoked** here. Upstream ships it model-invoked, but its file mode rewrites a file, so the rule above applies:
-
-- `SKILL.md` gains `disable-model-invocation: true`.
-- `agents/openai.yaml` gains `policy.allow_implicit_invocation: false`.
-
-The description keeps upstream's trigger phrasing rather than the human-facing one-liner a user-invoked skill would normally get. That costs nothing when nothing can auto-invoke it, and it keeps the diff to those two lines.
+It is **model-invoked**, as upstream ships it. That is a deliberate exception to the rule that anything rewriting a file is user-invoked: Robert's other projects rely on Claude reaching for it unprompted before outgoing drafts. Do not add `disable-model-invocation` or `policy.allow_implicit_invocation: false` back.
 
 **Do not hand-edit it otherwise.** A local improvement belongs upstream, or in a new skill. To check drift:
 

@@ -2,8 +2,7 @@
 """Report how far skills/productivity/humanizer has drifted from blader/humanizer.
 
 Humanizer is a port, not a fork: SKILL.md and
-agents/openai.yaml match upstream byte for byte once the two deliberate local
-edits below are undone. Upstream keeps them at the repo root; we keep them in a
+agents/openai.yaml match upstream byte for byte. Upstream keeps them at the repo root; we keep them in a
 bucket. Anything this script prints is either upstream moving ahead or a local
 edit that should not exist.
 
@@ -30,13 +29,10 @@ PORTED = {
 }
 
 # Deliberate local edits, stripped before comparing so an expected difference
-# does not read as drift. Both make the skill user-invoked in this repo, which
-# upstream does not do. Keep this list short: every entry is a place where
-# re-syncing upstream needs a human decision.
-LOCAL_EDITS = {
-    "SKILL.md": ["disable-model-invocation: true\n"],
-    "agents/openai.yaml": ["policy:\n  allow_implicit_invocation: false\n"],
-}
+# does not read as drift. Empty: the port matches upstream exactly. Keep it
+# that way; every entry is a place where re-syncing upstream needs a human
+# decision.
+LOCAL_EDITS: dict[str, list[str]] = {}
 
 
 def to_upstream(rel: str, text: str) -> str:
