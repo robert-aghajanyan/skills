@@ -68,38 +68,15 @@ Daily code work: building, refactoring, researching.
 **User-invoked**
 
 - `codex-collab`: Claude and Codex analyze independently, then debate to convergence. A genuine second opinion.
-- `mp-implement`: Build the work described by a spec or set of tickets, driving TDD at pre-agreed seams and closing out with a review before committing.
 
 **Model-invoked**
 
 - `decompose`: Audit one oversized module, plan a dependency-aware split, and execute it with zero breaking changes.
-- `mp-codebase-design`: Shared discipline and vocabulary for designing deep modules: small interfaces, clean seams, testable through the interface.
-- `mp-diagnosing-bugs`: Disciplined loop for hard bugs and performance regressions: build a feedback loop that goes red, minimise, hypothesise, instrument, fix, regression-test.
-- `mp-prototype`: Build a throwaway prototype to answer a design question: a shareable HTML file for state and logic, or several toggleable UI variations.
-- `mp-resolving-merge-conflicts`: Work an in-progress merge or rebase hunk by hunk, resolving by intent traced to each side primary source, then finish. Never --abort.
-- `mp-tdd`: Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time.
-- `mp-wizard`: Generate an interactive bash wizard that walks a human through steps only they can perform: provisioning, credentials, dashboards, one-off migrations.
 - `team-research`: Explore a question from several angles with agents that challenge each other's findings.
 
 ### Planning
 
-Stress-testing plans and turning them into specs, issues, and handoffs.
-
-**User-invoked**
-
-- `mp-grill-me`: Get relentlessly interviewed about a plan or design until every branch of the design tree is resolved.
-- `mp-grill-with-docs`: Grilling that also builds the domain model, sharpening terminology and updating CONTEXT.md and ADRs inline.
-- `mp-improve-codebase-architecture`: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
-- `mp-setup`: Scaffold the per-repo configuration the other skills assume: issue tracker, triage label vocabulary, and domain doc layout. Run once per repo.
-- `mp-to-spec`: Turn the current conversation into a spec and publish it to the project issue tracker.
-- `mp-to-tickets`: Break any plan, spec, or conversation into tracer-bullet tickets, each declaring its blocking edges.
-- `mp-triage`: Move issues and external PRs through a state machine of triage roles: categorise, verify, grill if needed, and write agent-ready briefs.
-- `mp-wayfinder`: Plan a chunk of work larger than one agent session as a map of decision tickets on the tracker, resolved one at a time until the way is clear.
-
-**Model-invoked**
-
-- `mp-domain-modeling`: Actively build and sharpen the project domain model by challenging terms, stress-testing with scenarios, and updating CONTEXT.md and ADRs inline.
-- `mp-grilling`: Interview the user in rounds, asking the whole settled frontier of the design tree at once, each question with a recommended answer.
+Nothing here yet. See the last flow below.
 
 ### Productivity
 
@@ -108,10 +85,6 @@ General workflow tools, not code-specific.
 **User-invoked**
 
 - `humanizer`: Rewrite AI-sounding text so it reads like the writer without changing what it says. Numbered tells, strongest first.
-- `mp-handoff`: Compact the current conversation into a handoff document so another agent can continue the work.
-- `mp-teach`: Teach the user a new skill or concept over multiple sessions, using the current directory as a stateful teaching workspace.
-- `mp-to-questionnaire`: Turn a decision you cannot answer alone into a Markdown questionnaire for the one person who can, filled in async or worked through together.
-- `mp-wait-what`: Fire this the moment a message does not land. The agent re-pitches it with the context you are missing, in plain English.
 
 ### Meta
 
@@ -123,7 +96,6 @@ Skills for building skills and navigating this repo.
 
 **Model-invoked**
 
-- `mp-writing-for-agents`: Writing documents for agents: skills, AGENTS.md and CLAUDE.md, and any doc an agent reaches by a pointer.
 - `optimize-prompt-caching`: Audit and optimize LLM prompt caching in any codebase: cache_control breakpoints, compaction, cost and latency wins.
 
 ## Common flows
@@ -132,24 +104,13 @@ Skills for building skills and navigating this repo.
 - **"One dimension only."** Call the single `codebase-*-review` skill for it. Cheaper and sharper than the suite.
 - **"I have a PR and want findings."** `team-review`. Want the findings fixed too? `pr-review-fix`. Want it fixed and re-reviewed until clean? `pr-clean-review`.
 - **"I'm about to ship and I'm nervous."** `production-readiness-gate`, last.
-- **"I have an idea, not a plan."** `mp-grill-me` to harden it, then `mp-to-spec`, then `mp-to-tickets`, then `mp-implement`.
-- **"The work is bigger than one session."** `mp-wayfinder` first: it maps the decisions before anyone writes tickets.
-- **"Something is broken and I don't know why."** `mp-diagnosing-bugs`. Do not reach for a review skill; reviews find risks, not this bug.
-- **"I'm mid-merge and it's a mess."** `mp-resolving-merge-conflicts`.
-- **"I don't know what this module should look like."** `mp-codebase-design` for the vocabulary, `mp-prototype` to answer it empirically.
 - **"This file is 3000 lines."** `decompose` for one file. `codebase-decomposition` for a repo-wide pass.
-- **"I'm running out of context."** `mp-handoff`.
-- **"I did not understand what you just said."** `mp-wait-what`.
 - **"This draft sounds like a chatbot wrote it."** `humanizer`.
 - **"I want a second opinion from a different model."** `codex-collab`.
-
-## First run in a repo
-
-`mp-setup` configures the issue tracker, triage labels, and domain doc layout that `mp-to-spec`, `mp-to-tickets`, `mp-triage`, and `mp-wayfinder` all assume. Tell the user to run `/mp-setup` once per repo before those four.
+- **"I have an idea to harden, a bug to chase, or a session to hand off."** Not this plugin. Point the user at Matt Pocock's skills (`mattpocock-skills` plugin): grilling, specs, tickets, TDD, debugging, prototypes and handoffs.
 
 ## Gotchas
 
 - This map lies the moment a skill is added, renamed, or removed and this file is not updated. Re-read it whenever the skill set changes.
 - Routing to a user-invoked skill is a message to the human, not a tool call. There is no way for one skill to start another user-invoked skill.
 - Prefer one skill over a sequence. Chaining three skills at a suggestion costs the user real money and time.
-- The `mp-` skills are ported from github.com/mattpocock/skills and follow that repo's conventions. The rest are this repo's own.

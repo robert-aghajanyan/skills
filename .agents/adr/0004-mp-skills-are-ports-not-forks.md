@@ -1,5 +1,7 @@
 # The mp-* skills are ports, not forks
 
+**Superseded by [ADR 0006](0006-drop-the-mp-ports.md).**
+
 ## Context
 
 Seven skills in this repo arrived in August 2026 as a "Codex-derived install" of Matt Pocock's skills, carrying an `mp-` prefix and no record of which upstream version they came from. By September they had quietly diverged: `mp-grill-me` still asked one question at a time while upstream had moved to asking a whole settled frontier per round, and `mp-to-prd` / `mp-to-issues` kept names upstream had already retired in favour of `to-spec` / `to-tickets`.

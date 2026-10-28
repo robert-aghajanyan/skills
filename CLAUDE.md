@@ -41,26 +41,13 @@ Anything that deletes, rewrites, commits, publishes, or spends a lot of tokens i
 
 Operative dependencies on model-invoked skills are written as `Call the Skill tool with "name"` — one skill per call, not a bare `/name`, not a `../other-skill/FILE.md` link.
 
-## Upstream: the mp-* skills
+## No mp-* skills
 
-Every skill prefixed `mp-` is a **port** of a skill from [mattpocock/skills](https://github.com/mattpocock/skills) (MIT), not a fork. Content matches upstream byte for byte; only the following are changed, and only these:
-
-- the skill name gains the `mp-` prefix, and cross-skill references are rewritten to our namespace;
-- upstream `code-review`, `research`, and `ask-matt` references point at our `team-review`, `team-research`, and `which-skill`, which is why those three are not ported;
-- `mp-setup` (upstream `setup-matt-pocock-skills`) is debranded, whitelisted in the sync checker.
-
-**Do not hand-edit an `mp-` skill.** A local improvement belongs upstream, or in a new non-`mp-` skill. To re-sync:
-
-```bash
-python3 scripts/check-upstream-sync.py          # summary of drift
-python3 scripts/check-upstream-sync.py --diff   # what actually changed
-```
-
-It clones upstream, reverses our renames, and diffs. Zero drift is the expected state. See [ADR 0004](.agents/adr/0004-mp-skills-are-ports-not-forks.md).
+Versions before 4.0.0 shipped ports of Matt Pocock's skills under an `mp-` prefix. They were dropped in favour of installing his `mattpocock-skills` plugin directly. Do not re-add them. See [ADR 0006](.agents/adr/0006-drop-the-mp-ports.md).
 
 ## Upstream: humanizer
 
-`skills/productivity/humanizer` is a port of [blader/humanizer](https://github.com/blader/humanizer) (MIT, Siqi Chen), on the same terms as the `mp-` skills: `SKILL.md` and `agents/openai.yaml` match upstream byte for byte once two deliberate edits are undone. Nothing is renamed, so there is no rename reversal. The `metadata.version` is upstream's, not ours.
+`skills/productivity/humanizer` is a port of [blader/humanizer](https://github.com/blader/humanizer) (MIT, Siqi Chen), as a **port**, not a fork: `SKILL.md` and `agents/openai.yaml` match upstream byte for byte once two deliberate edits are undone. Nothing is renamed, so there is no rename reversal. The `metadata.version` is upstream's, not ours.
 
 The two edits, both listed in `LOCAL_EDITS` in the sync checker, exist to make the skill **user-invoked** here. Upstream ships it model-invoked, but its file mode rewrites a file, so the rule above applies:
 
@@ -91,8 +78,6 @@ claude plugin validate . --strict
 `check-consistency.py` is the one that catches drift: a promoted skill missing from `plugin.json`, a bucket README, the top-level README, or the `which-skill` map; a non-promoted skill leaking into the plugin; the two manifest versions disagreeing; a skill whose invocation axis differs between harnesses.
 
 All three run in CI ([.github/workflows/ci.yml](.github/workflows/ci.yml)).
-
-`python3 scripts/check-upstream-sync.py` checks the `mp-` ports against upstream.
 
 `python3 scripts/check-humanizer-sync.py` checks the `humanizer` port against its own upstream.
 

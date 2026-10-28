@@ -1,7 +1,7 @@
 {
   "name": "rob",
-  "version": "3.1.0",
-  "description": "Agent skills for real engineering: deep codebase review across 13 dimensions, multi-agent PR review and fix loops, TDD and implementation flows, plan stress-testing, and skill authoring.",
+  "version": "4.0.0",
+  "description": "Agent skills for real engineering: deep codebase review across 13 dimensions, multi-agent PR review and fix loops, and skill authoring.",
   "author": {
     "name": "Robert Aghajanyan",
     "url": "https://github.com/robert-aghajanyan"
@@ -15,8 +15,6 @@
     "code-review",
     "security-review",
     "pr-review",
-    "tdd",
-    "planning",
     "refactoring"
   ],
   "skills": [
@@ -42,33 +40,11 @@
     "./skills/pr-review/team-review",
     "./skills/pr-review/team-review-plus",
     "./skills/engineering/codex-collab",
-    "./skills/engineering/mp-implement",
     "./skills/engineering/decompose",
-    "./skills/engineering/mp-codebase-design",
-    "./skills/engineering/mp-diagnosing-bugs",
-    "./skills/engineering/mp-prototype",
-    "./skills/engineering/mp-resolving-merge-conflicts",
-    "./skills/engineering/mp-tdd",
-    "./skills/engineering/mp-wizard",
     "./skills/engineering/team-research",
-    "./skills/planning/mp-grill-me",
-    "./skills/planning/mp-grill-with-docs",
-    "./skills/planning/mp-improve-codebase-architecture",
-    "./skills/planning/mp-setup",
-    "./skills/planning/mp-to-spec",
-    "./skills/planning/mp-to-tickets",
-    "./skills/planning/mp-triage",
-    "./skills/planning/mp-wayfinder",
-    "./skills/planning/mp-domain-modeling",
-    "./skills/planning/mp-grilling",
-    "./skills/productivity/mp-handoff",
-    "./skills/productivity/mp-teach",
-    "./skills/productivity/mp-to-questionnaire",
-    "./skills/productivity/mp-wait-what",
     "./skills/productivity/humanizer",
     "./skills/meta/skill-builder",
     "./skills/meta/which-skill",
-    "./skills/meta/mp-writing-for-agents",
     "./skills/meta/optimize-prompt-caching"
   ]
 }

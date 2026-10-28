@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Report how far skills/productivity/humanizer has drifted from blader/humanizer.
 
-Like the mp-* skills, humanizer is a port, not a fork: SKILL.md and
+Humanizer is a port, not a fork: SKILL.md and
 agents/openai.yaml match upstream byte for byte once the two deliberate local
 edits below are undone. Upstream keeps them at the repo root; we keep them in a
 bucket. Anything this script prints is either upstream moving ahead or a local
