@@ -138,7 +138,7 @@ Buckets `codebase-review/`, `pr-review/`, `engineering/`, `planning/`, `producti
 
 ## Contributing
 
-Read [CLAUDE.md](CLAUDE.md), then:
+Read [.claude/CLAUDE.md](.claude/CLAUDE.md), then:
 
 ```bash
 python3 skills/meta/skill-builder/scripts/validate-skill.py skills/<bucket>/<name>/

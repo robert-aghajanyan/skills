@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 Guidance for agents (Claude Code, Codex, etc.) working in this repository.
-`AGENTS.md` is a symlink to this file — edit this one.
+`AGENTS.md` at the repo root is a symlink to this file — edit this one. It lives in `.claude/` so the plugin, which ships the repo root, does not carry it.
 
 ## What This Repo Is
 
@@ -20,7 +20,7 @@ Skills live in bucket folders under `skills/`:
 - `in-progress/` — beta: public on purpose, not shipped in the plugin
 - `deprecated/` — retired, not shipped in the plugin
 
-The first six are **promoted**: the plugin ships exactly those. See [ADR 0002](.agents/adr/0002-bucket-folders-and-the-promoted-set.md).
+The first six are **promoted**: the plugin ships exactly those. See [ADR 0002](../.agents/adr/0002-bucket-folders-and-the-promoted-set.md).
 
 Each skill is `skills/<bucket>/<name>/` containing:
 
@@ -37,13 +37,13 @@ Also: `template/SKILL.md` (starter), `spec/agent-skills-spec.md` (local spec cop
 
 Every skill is **user-invoked** (`disable-model-invocation: true` plus `policy.allow_implicit_invocation: false` in `agents/openai.yaml`) or **model-invoked** (neither). A skill is user-invoked in both harnesses or neither.
 
-Anything that deletes, rewrites, commits, publishes, or spends a lot of tokens is user-invoked. **No skill can start a user-invoked skill** — only the human can. When a step depends on one, say "tell the user to run `/name`", never "call the Skill tool". Full rules in [.agents/invocation.md](.agents/invocation.md).
+Anything that deletes, rewrites, commits, publishes, or spends a lot of tokens is user-invoked. **No skill can start a user-invoked skill** — only the human can. When a step depends on one, say "tell the user to run `/name`", never "call the Skill tool". Full rules in [.agents/invocation.md](../.agents/invocation.md).
 
 Operative dependencies on model-invoked skills are written as `Call the Skill tool with "name"` — one skill per call, not a bare `/name`, not a `../other-skill/FILE.md` link.
 
 ## No mp-* skills
 
-Versions before 4.0.0 shipped ports of Matt Pocock's skills under an `mp-` prefix. They were dropped in favour of installing his `mattpocock-skills` plugin directly. Do not re-add them. See [ADR 0006](.agents/adr/0006-drop-the-mp-ports.md).
+Versions before 4.0.0 shipped ports of Matt Pocock's skills under an `mp-` prefix. They were dropped in favour of installing his `mattpocock-skills` plugin directly. Do not re-add them. See [ADR 0006](../.agents/adr/0006-drop-the-mp-ports.md).
 
 ## Upstream: humanizer
 
@@ -72,7 +72,7 @@ claude plugin validate . --strict
 
 `check-consistency.py` is the one that catches drift: a promoted skill missing from `plugin.json`, a bucket README, the top-level README, or the `which-skill` map; a non-promoted skill leaking into the plugin; the two manifest versions disagreeing; a skill whose invocation axis differs between harnesses.
 
-All three run in CI ([.github/workflows/ci.yml](.github/workflows/ci.yml)).
+All three run in CI ([.github/workflows/ci.yml](../.github/workflows/ci.yml)).
 
 `python3 scripts/check-humanizer-sync.py` checks the `humanizer` port against its own upstream.
 
@@ -91,13 +91,13 @@ The `which-skill` router lies the moment a skill is added, renamed, or removed w
 
 ## Releasing
 
-One version number, in `.claude-plugin/plugin.json`; `marketplace.json`'s `metadata.version` mirrors it. Bump both together and tag. Claude Code uses the plugin `version` to decide when installed users see an update. See [ADR 0003](.agents/adr/0003-version-lives-only-in-plugin-json.md).
+One version number, in `.claude-plugin/plugin.json`; `marketplace.json`'s `metadata.version` mirrors it. Bump both together and tag. Claude Code uses the plugin `version` to decide when installed users see an update. See [ADR 0003](../.agents/adr/0003-version-lives-only-in-plugin-json.md).
 
 ## Style
 
 Kebab-case for skill directories and frontmatter names. Markdown: short sections, direct instructions, fenced code blocks. Python helpers: standard-library-first, deterministic. Conventional Commits, imperative mood.
 
-Install wording is copied verbatim from [.agents/install-block.md](.agents/install-block.md). Change it there first, then propagate. `claude install-skill` is not a command; never write it.
+Install wording is copied verbatim from [.agents/install-block.md](../.agents/install-block.md). Change it there first, then propagate. `claude install-skill` is not a command; never write it.
 
 ## Security
 

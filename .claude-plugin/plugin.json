@@ -1,6 +1,6 @@
 {
   "name": "rob",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "Agent skills for real engineering: deep codebase review across 13 dimensions, multi-agent PR review and fix loops, and skill authoring.",
   "author": {
     "name": "Robert Aghajanyan",
